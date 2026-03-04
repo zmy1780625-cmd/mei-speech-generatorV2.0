@@ -27,7 +27,7 @@
         /* 左侧导航栏 - 粉色风格 */
         .left-sidebar {
             width: 260px;
-            background: linear-gradient(180deg, #ff85a2 0%, #C9C2DD 100%);
+            background: linear-gradient(180deg, #ff85a2 0%, #a99ff2 100%);
             padding: 24px 20px;
             display: flex;
             flex-direction: column;
@@ -44,18 +44,161 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 8px;
+            position: relative;
         }
 
         .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 200% 200%;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 24px;
+            box-shadow: 
+                0 4px 15px rgba(102, 126, 234, 0.4),
+                0 0 30px rgba(240, 147, 251, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: 
+                gradientShift 3s ease infinite,
+                floatIcon 2s ease-in-out infinite,
+                pulseGlow 2s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        /* AI神经网络背景 */
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(255,255,255,0.03) 8px,
+                    rgba(255,255,255,0.03) 16px
+                );
+            animation: rotateBackground 10s linear infinite;
+        }
+
+        /* AI芯片电路纹理 */
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 8px 8px;
+            opacity: 0.5;
+        }
+
+        /* 动态粒子效果 */
+        .logo-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 14px;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .particle:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            animation: particleFloat 3s ease-in-out infinite;
+        }
+
+        .particle:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation: particleFloat 3s ease-in-out infinite 0.5s;
+        }
+
+        .particle:nth-child(3) {
+            bottom: 25%;
+            left: 30%;
+            animation: particleFloat 3s ease-in-out infinite 1s;
+        }
+
+        .particle:nth-child(4) {
+            top: 40%;
+            right: 25%;
+            animation: particleFloat 3s ease-in-out infinite 1.5s;
+        }
+
+        /* 动画定义 */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 4px 15px rgba(102, 126, 234, 0.4),
+                    0 0 30px rgba(240, 147, 251, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 6px 25px rgba(102, 126, 234, 0.6),
+                    0 0 50px rgba(240, 147, 251, 0.5),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        @keyframes rotateBackground {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes particleFloat {
+            0%, 100% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            25% { 
+                transform: translate(5px, -5px) scale(1.2);
+                opacity: 1;
+            }
+            50% { 
+                transform: translate(0, -10px) scale(1);
+                opacity: 0.8;
+            }
+            75% { 
+                transform: translate(-5px, -5px) scale(0.8);
+                opacity: 0.6;
+            }
         }
 
         .logo-text {
@@ -816,7 +959,15 @@
         <!-- 左侧导航栏 -->
         <aside class="left-sidebar">
             <div class="logo-area">
-                <div class="logo-icon">🎤</div>
+                <div class="logo-icon">
+                    🤖
+                    <div class="logo-particles">
+                        <span class="particle"></span>
+                        <span class="particle"></span>
+                        <span class="particle"></span>
+                        <span class="particle"></span>
+                    </div>
+                </div>
                 <div class="logo-text">
                     <div class="logo-title">梅总演讲稿生成器</div>
                     <div class="logo-subtitle">AI驱动的内容创作</div>
@@ -835,10 +986,6 @@
             </nav>
             
             <div class="left-sidebar-footer">
-                <div class="system-info">
-                    <div>🔍 RAG智能数据增强</div>
-                    <div>📊 多场景适配生成</div>
-                </div>
                 <div class="shortcut-tip">
                     💡 快捷键<br>
                     Ctrl+Enter 生成<br>
@@ -1980,6 +2127,4 @@ ${audienceGuidance}`;
         });
     </script>
 </body>
-
 </html>
-
