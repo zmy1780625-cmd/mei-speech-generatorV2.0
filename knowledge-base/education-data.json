@@ -1,0 +1,184 @@
+{
+  "metadata": {
+    "version": "1.1",
+    "lastUpdated": "2025-03-05",
+    "description": "腾讯教育石梅总演讲稿生成器知识库"
+  },
+  "policies": [
+    {
+      "id": "policy-001",
+      "title": "教育部人工智能+教育行动计划",
+      "date": "2025-01",
+      "source": "教育部",
+      "content": "加快教育大模型建设与人工智能+教育场景创新，加强对学生数字素养和人工智能应用能力的培养",
+      "tags": ["AI教育", "政策", "大模型"],
+      "importance": "high"
+    },
+    {
+      "id": "policy-002",
+      "title": "国家教育数字化战略行动",
+      "date": "2024-09",
+      "source": "教育部",
+      "content": "推进教育新型基础设施建设，构建高质量教育支撑体系",
+      "tags": ["数字化转型", "基础设施", "政策"],
+      "importance": "high"
+    }
+  ],
+  "tencent_education": {
+    "platforms": [
+      {
+        "name": "腾讯教育智能体平台",
+        "launchDate": "2024-09",
+        "features": ["智能体创建", "多智能体协作", "教学场景适配"],
+        "stats": {
+          "schools": 300,
+          "teams": 64,
+          "participants": 109,
+          "outputs": 100
+        }
+      },
+      {
+        "name": "青少年AIGC创作工坊",
+        "launchDate": "2024-08-19",
+        "description": "面向青少年的人工智能生成内容（AIGC）创作平台，旨在探索AIGC的无限潜力，帮助青少年掌握AI辅助下的数字创作能力",
+        "position": "腾讯青少年人工智能教育方案的重要组成部分，是'四大AI实验室'之一（与AI体验馆、AI训练馆、AI竞技场并列）",
+        "coreFeatures": [
+          "AI生文、AI绘画、AI视频、AI建模、AI音乐、AI编程与AI智能体等创作工具",
+          "跨学科项目式学习（PBL）：支持'AI+学科'创意实践（AI+音乐、AI+化学、AI+英语、AI+数学等）",
+          "安全防护体系：自研模型、伦理审查、全流程内容与隐私管控",
+          "教育支撑平台：统一账号体系、课程资源管理，融入'教、学、管、评'全流程"
+        ],
+        "technicalBase": "基于腾讯混元及优秀开源大模型，提供一站式多模态AIGC创作工具",
+        "educationalGoal": "腾讯青少年人工智能教育从'创客教育'、'STEAM+AI教育'迈向'AIGC教育'2.0阶段的核心载体，为'人机共育'搭建创新性体验平台",
+        "applicationScenarios": [
+          "校内课程教学",
+          "课后服务",
+          "科普竞赛"
+        ],
+        "successfulCases": [
+          {
+            "school": "北京师范大学附属中学",
+            "application": "智能体助力教学"
+          },
+          {
+            "school": "首师大子期实验中学",
+            "application": "'AI+生物'3D建模探索"
+          }
+        ],
+        "stats": {
+          "schools": 300,
+          "teachersStudents": 5000,
+          "works": 30000
+        },
+        "features": ["AI生文", "AI绘画", "AI视频", "AI建模", "AI音乐", "AI编程", "AI智能体"]
+      }
+    ],
+    "strategies": [
+      {
+        "name": "All in AI，AI in All",
+        "components": ["AI Education", "AI for Education", "AI for Science"]
+      }
+    ]
+  },
+  "speech_patterns": {
+    "opening": [
+      "尊敬的各位师长、同仁，大家好！",
+      "各位来宾、各位伙伴，大家下午好！",
+      "尊敬的各位领导和嘉宾，大家好！"
+    ],
+    "mission": ["用户为本，科技向善"],
+    "vision": ["用数字科技，让教育更富创造力"],
+    "values": ["科技助教、连接兴学，专业为育"],
+    "closing": [
+      "让我们携手同行，共同书写教育创新发展的新篇章！",
+      "期待与各位继续深化合作，共创美好未来！"
+    ]
+  },
+  "cases": [
+    {
+      "id": "case-001",
+      "title": "同济大学大模型合作",
+      "date": "2024",
+      "partner": "同济大学",
+      "content": "围绕大模型核心展开大设计层面的深度协同创新",
+      "results": "共同规划面向智能教学场景的下一代教育大模型"
+    },
+    {
+      "id": "case-002",
+      "title": "上海海事大学海商法大模型",
+      "date": "2024-10",
+      "partner": "上海海事大学",
+      "content": "共同打造海商法大模型，推出双平台战略",
+      "results": "发布海商法大模型和教育数字化平台"
+    },
+    {
+      "id": "case-003",
+      "title": "腾讯高校AI嘉年华-AI Coding实训营",
+      "date": "2025",
+      "partner": "清华大学、上海交通大学、西安电子科技大学、华南理工大学、深圳大学、香港城市大学",
+      "content": "面向计算机、软件或人工智能专业学生，以'课程讲解+实训'形式开展的线下/线上训练营，涵盖AI Coding发展趋势、智能体构建、工具入门与腾讯工程实践等内容",
+      "results": "培养学生在AI Coding领域的产业技术实践能力，服务于AI Coding创新挑战赛等赛事，体现'以赛促学、以赛促创'模式",
+      "details": {
+        "duration": "3课时（约0.5天）",
+        "modules": [
+          "AI Coding发展趋势与现状",
+          "如何构建AI Coding智能体",
+          "AI Coding工具入门与腾讯工程实践",
+          "训练营实践（规约编程、大模型实训-构建个人codebuddy智能体等7选2）"
+        ],
+        "tools": ["CodeBuddy IDE", "Cloud Studio"],
+        "relatedEvents": ["腾讯未来产品经理创造营", "AI Coding创新挑战赛"]
+      }
+    },
+    {
+      "id": "case-004",
+      "title": "青少年AIGC创作工坊",
+      "date": "2024-08-19",
+      "partner": "北京师范大学附属中学、首师大子期实验中学等300所学校",
+      "content": "面向青少年的AIGC创作平台，基于腾讯混元及开源大模型，提供AI生文、AI绘画、AI视频、AI建模、AI音乐、AI编程与AI智能体等创作工具，支持跨学科项目式学习（PBL）",
+      "results": "服务超过300所学校、5000名师生，产生超过30000份学生作品；应用于校内课程、课后服务及科普竞赛等多种场景",
+      "details": {
+        "coreModules": [
+          "AI生文、AI绘画、AI视频、AI建模、AI音乐、AI编程与AI智能体",
+          "跨学科项目式学习（PBL）：AI+音乐、AI+化学、AI+英语、AI+数学",
+          "安全防护体系：自研模型、伦理审查、全流程内容与隐私管控",
+          "教育支撑平台：统一账号、课程资源、教/学/管/评全流程"
+        ],
+        "educationalPosition": "腾讯青少年AI教育从'创客教育'、'STEAM+AI教育'迈向'AIGC教育'2.0阶段的核心载体",
+        "productArchitecture": "四大AI实验室之一（AI体验馆、AI训练馆、AI竞技场、AIGC创作工坊）",
+        "successfulCases": [
+          {
+            "school": "北京师范大学附属中学",
+            "application": "智能体助力教学"
+          },
+          {
+            "school": "首师大子期实验中学",
+            "application": "'AI+生物'3D建模探索"
+          }
+        ]
+      }
+    }
+  ],
+  "hot_topics": [
+    {
+      "topic": "教育数字化转型",
+      "keywords": ["智慧教育", "数字校园", "教育新基建"],
+      "trend": "上升"
+    },
+    {
+      "topic": "AI赋能教学",
+      "keywords": ["智能助教", "个性化学习", "AI课程"],
+      "trend": "上升"
+    },
+    {
+      "topic": "大模型教育应用",
+      "keywords": ["教育大模型", "Agent", "AIGC"],
+      "trend": "热门"
+    },
+    {
+      "topic": "AIGC青少年教育",
+      "keywords": ["AIGC创作工坊", "人机共育", "AI+学科", "跨学科PBL"],
+      "trend": "热门"
+    }
+  ]
+}
