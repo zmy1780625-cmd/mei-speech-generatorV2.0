@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "version": "1.1",
-    "lastUpdated": "2025-03-05",
+    "version": "1.2",
+    "lastUpdated": "2025-03-06",
     "description": "腾讯教育石梅总演讲稿生成器知识库"
   },
   "policies": [
@@ -77,6 +77,186 @@
       {
         "name": "All in AI，AI in All",
         "components": ["AI Education", "AI for Education", "AI for Science"]
+      }
+    ],
+    "solutions": [
+      {
+        "id": "solution-001",
+        "name": "腾讯青少年人工智能教育解决方案",
+        "type": "K12人工智能教育",
+        "coverage": "小学低年级到高中全学段",
+        "reach": "300多个城市、20000多所学校",
+        "impact": "超过800万师生、3000万+AI实验与编程作品",
+        "description": "面向全国各学龄段师生提供的以人工智能课程教学为核心的整体解决方案，旨在降低人工智能教学门槛，助力青少年人工智能教育的发展和普及",
+        "courseSystem": {
+          "structure": "阶梯式L1-L5五个等级",
+          "levels": [
+            {
+              "level": "L1-L2",
+              "target": "小学低年级",
+              "content": "趣味编程入门"
+            },
+            {
+              "level": "L3",
+              "target": "小学高年级",
+              "content": "人工智能初级应用"
+            },
+            {
+              "level": "L4-L5",
+              "target": "初高中",
+              "content": "人工智能算法编程、创意应用"
+            }
+          ],
+          "features": [
+            "紧扣国家信息科技课程标准",
+            "与教育部门、高校专家、一线教师共同研发",
+            "跨学科融合：AI与语文、数学、美术、科学等学科结合",
+            "项目式学习（PBL）：解决实际问题中应用AI技术"
+          ]
+        },
+        "platformsAndTools": {
+          "aiExperimentPlatform": {
+            "name": "AI实验平台",
+            "modules": [
+              {
+                "name": "AI体验馆",
+                "features": ["人脸验证", "AI围棋", "轻量化AI能力体验"]
+              },
+              {
+                "name": "AI训练馆",
+                "features": ["可视化算法呈现", "理解AI模型与原理"]
+              },
+              {
+                "name": "AI竞技场",
+                "features": ["AI足球赛", "迷宫寻宝", "Python编程与机器学习融入趣味对抗"]
+              }
+            ]
+          },
+          "programmingTools": {
+            "name": "腾讯扣叮",
+            "description": "自研国产IDE工具平台",
+            "features": ["图形化编程", "Python编程"],
+            "labs": ["创意实验室", "Python实验室", "硬件实验室", "小程序实验室等8大实验室"]
+          },
+          "virtualSimulation": {
+            "name": "虚拟仿真实验室",
+            "technology": "腾讯织梦游戏引擎，3D虚拟仿真技术",
+            "scenarios": ["航天工程", "极地科考", "机器人编程", "人工智能实验"],
+            "advantages": ["降低硬件成本", "适配学校机房和传统教室"]
+          }
+        },
+        "teacherSupport": {
+          "trainingSystem": {
+            "description": "联合高校和教育专家提供教师培训",
+            "resources": ["线上线下培训课程", "教学案例库", "在线研讨平台"]
+          },
+          "managementTools": {
+            "name": "腾讯智启学堂",
+            "functions": ["备授课", "作业布置与批改", "学情分析", "班级管理"]
+          }
+        },
+        "competitionsAndOutcomes": {
+          "events": {
+            "description": "对接国家白名单赛事",
+            "competitions": ["WRC青少年机器人设计大赛", "全国青少年信息素养大赛"]
+          },
+          "creationWorkshop": {
+            "name": "青少年AIGC创作工坊",
+            "tools": ["AI绘画", "AI生文", "AI视频", "AI 3D建模"],
+            "outputs": ["数字绘本", "AI视频", "3D模型"]
+          }
+        },
+        "ecosystem": {
+          "hardware": {
+            "description": "智能硬件开放平台",
+            "supportedDevices": ["Arduino", "Micro:bit", "机械臂等20多种主流硬件"]
+          },
+          "partners": {
+            "universities": ["北京大学", "北京师范大学"],
+            "institutions": ["学而思培优", "乐博乐博"]
+          }
+        }
+      },
+      {
+        "id": "solution-002",
+        "name": "腾讯高校人才培养方案",
+        "type": "高等教育人才培养",
+        "description": "腾讯与高校合作，围绕产业需求和教育数字化转型，培养创新型数字人才的综合体系",
+        "coreComponents": [
+          {
+            "name": "产教融合课程共建",
+            "content": {
+              "curriculumDesign": "与高校合作开发云计算、大数据、人工智能等课程，融入企业实际案例和技术",
+              "practicalPlatforms": ["腾讯云实验室", "开悟平台"],
+              "exampleCourses": ["人工智能+交通", "深度强化学习"]
+            }
+          },
+          {
+            "name": "校企协同育人项目",
+            "content": {
+              "ministryProject": {
+                "name": "教育部产学合作协同育人项目",
+                "status": "首批企业参与",
+                "stats": "与180余所高校合作立项近450项",
+                "coverage": ["数字经济", "数字文创", "基础软件"]
+              },
+              "featuredPrograms": [
+                {
+                  "name": "南京信息工程大学腾讯特色班",
+                  "type": "特色班"
+                },
+                {
+                  "name": "广东轻工职业技术学院腾讯云数字创意设计产业学院",
+                  "type": "产业学院"
+                }
+              ]
+            }
+          },
+          {
+            "name": "技能认证与职业发展",
+            "content": {
+              "certificationSystem": {
+                "name": "腾讯云认证体系",
+                "types": ["通用认证", "专项认证", "线上微认证"],
+                "domains": ["云计算", "人工智能", "大数据"]
+              },
+              "careerSupport": {
+                "platform": "腾讯云大学人才招聘平台",
+                "resources": "腾讯及生态企业岗位资源",
+                "opportunities": ["实习", "就业"]
+              }
+            }
+          },
+          {
+            "name": "拔尖人才培养计划",
+            "content": {
+              "qingyunPlan": {
+                "name": "青云计划",
+                "target": "全球顶尖科技人才",
+                "benefits": ["定制化培养", "顶配技术资源", "前沿课题研究机会"],
+                "coreBusiness": "混元大模型"
+              },
+              "openSourcePlan": {
+                "name": "腾讯犀牛鸟开源人才培养计划",
+                "stages": ["开源基础课程", "开源issue实践", "开源课题实战"]
+              }
+            }
+          },
+          {
+            "name": "教育信息化与智慧校园建设",
+            "content": {
+              "digitalTeaching": {
+                "tools": ["腾讯会议", "腾讯微校", "腾讯文档"],
+                "applications": ["远程教学", "在线学习", "教学管理"]
+              },
+              "smartCampus": {
+                "technologies": ["腾讯云", "企业微信"],
+                "solutions": ["一网通办", "智能排课", "校园安全管理"]
+              }
+            }
+          }
+        ],
+        "goal": "培养适应产业需求的创新型数字人才，推动教育链、人才链与产业链、创新链的有机衔接"
       }
     ]
   },
