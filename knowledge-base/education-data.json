@@ -39,7 +39,7 @@
       },
       {
         "name": "青少年AIGC创作工坊",
-        "launchDate": "2024-08-19",
+        "launchDate": "2025-8-19 全球智慧教育大会正式发布",
         "description": "面向青少年的人工智能生成内容（AIGC）创作平台，旨在探索AIGC的无限潜力，帮助青少年掌握AI辅助下的数字创作能力",
         "position": "腾讯青少年人工智能教育方案的重要组成部分，是'四大AI实验室'之一（与AI体验馆、AI训练馆、AI竞技场并列）",
         "coreFeatures": [
@@ -58,11 +58,19 @@
         "successfulCases": [
           {
             "school": "北京师范大学附属中学",
-            "application": "智能体助力教学"
+            "application": "开展智能体助力教学创新"
+          },
+           {
+            "school": "鄂尔多斯市杭锦旗龙子心小学",
+            "application": "开展“AI + 语文”学习活动，重塑对“母亲河”的认知"
+          },
+          {
+            "school": "区域普及案例——广州市",
+            "application": "为全市中小学提供包含虚拟仿真实验室的人工智能课程教学资源配套服务"
           },
           {
             "school": "首师大子期实验中学",
-            "application": "'AI+生物'3D建模探索"
+            "application": "学生开展“AI + 生物”3D建模探索人体奥秘"
           }
         ],
         "stats": {
@@ -362,3 +370,4 @@
     }
   ]
 }
+
