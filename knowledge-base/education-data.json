@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "version": "1.5",
+    "version": "1.6",
     "lastUpdated": "2025-03-06",
     "description": "腾讯教育石梅总演讲稿生成器知识库"
   },
@@ -29,56 +29,35 @@
       {
         "name": "腾讯教育智能体平台",
         "launchDate": "2025-09",
-        "positioning": "新一代教育超级入口，学、用、创、赛一站式学习平台",
-        "description": "通过Agent技术助力课堂教学模式创新，打造新一代学习平台",
-        "coreCapabilities": {
-          "multiAgent": {
-            "name": "多智能体协作与资源调度",
-            "features": ["多智能体自主规划", "智能体协作", "资源调度优化"]
-          },
-          "agentTypes": {
-            "categories": ["教学智能体", "科研智能体", "专家智能体", "管理智能体"],
-            "features": ["融合学科教育专家智慧", "提供权威专业解答"]
-          },
-          "resources": {
-            "components": ["知识库", "应用模版", "生产力工具智能体"],
-            "builtIn": "新一代全场景教育智能体"
-          },
-          "tools": {
-            "aiTools": ["图像生成", "视频生成", "音乐生成", "编程助手", "论文检索"],
-            "coverage": "教-学-管-研全场景"
-          }
-        },
-        "productValue": {
-          "positioning": "新一代教育超级入口",
+        "positioning": "新一代教育超级入口，学、用、创、赛一站式学习生态",
+        "description": "腾讯教育针对教育场景打造的AI原生平台，通过Agent技术推动课堂教学模式创新，构建新一代学习生态",
+        "corePositioning": {
+          "goal": "新一代教育超级入口",
           "boundaryBreak": "打破传统教学边界",
-          "ecosystem": {
-            "integratedProducts": ["腾讯文档", "企业微信", "Cloud Studio"],
+          "ecosystemIntegration": {
+            "products": ["腾讯文档", "企业微信", "Cloud Studio"],
             "seamlessExperience": ["课程学习", "实训工具", "知识管理", "创作分享"]
           }
         },
-        "features": ["智能体创建", "多智能体协作", "教学场景适配"],
-        "stats": {
-          "schools": 8,
-          "teams": 64,
-          "participants": 109,
-          "outputs": 100,
-          "outputDirections": ["学业规划", "代码开发", "智能助教"]
-        },
-        "competitionCases": {
-          "participatingUniversities": ["北京大学", "清华大学", "复旦大学", "上海交通大学", "浙江大学", "南京大学", "中国科学技术大学", "西安交通大学"],
-          "format": "智能体大赛",
-          "achievements": "100+教育智能体应用成果"
-        },
-        "successfulCases": [
-          {
-            "school": "江苏开放大学",
-            "deploymentDate": "2025-08",
-            "coverage": "20万师生",
-            "focus": "Agent在终身教育场景的应用",
-            "benefits": ["智能体自主规划与资源调度", "提升教学效率", "优化学习体验"]
+        "coreFunctions": {
+          "multiAgentCollaboration": {
+            "name": "多智能体协作与资源调度",
+            "description": "内置新一代全场景教育智能体，整合知识库、应用模板、生产力工具智能体，支持多智能体自主规划与协作",
+            "coverage": "教-学-管-研全场景"
+          },
+          "agentTypes": {
+            "categories": ["教学智能体", "科研智能体", "专家智能体", "管理智能体"],
+            "features": ["融合学科教育专家智慧", "提供权威解答"],
+            "tools": ["图像生成", "视频生成", "音乐生成", "编程助手", "论文检索"]
           }
-        ]
+        },
+        "technicalSupport": {
+          "agentInfra": ["Serverless秒级启动", "数万并发", "长期记忆管理"],
+          "models": ["混元大模型（生文、生图、生视频等核心能力）"],
+          "computing": ["TACO推理加速", "RDMA星脉网络"]
+        },
+        "features": ["智能体创建", "多智能体协作", "教学场景适配"],
+        "applicationScenarios": ["高校智能体大赛", "终身教育", "成人职业技能提升", "老年教育"]
       },
       {
         "name": "青少年AIGC创作工坊",
@@ -437,6 +416,48 @@
     },
     {
       "id": "case-005",
+      "title": "腾讯教育智能体平台使用案例",
+      "date": "2025-09",
+      "partner": "北京大学、清华大学、复旦大学、上海交通大学、浙江大学、南京大学、中国科学技术大学、西安交通大学、江苏开放大学等",
+      "content": "腾讯教育针对教育场景打造的AI原生平台，通过Agent技术推动课堂教学模式创新，构建'学、用、创、赛'一站式新一代学习生态。平台以'新一代教育超级入口'为目标，联动腾讯生态资源（腾讯文档、企业微信、Cloud Studio等），实现课程学习、实训工具、知识管理与创作分享的无缝衔接",
+      "results": "平台助力多所高校举办智能体大赛，吸引8所高校64支战队109名选手参与，产出100+涵盖学业规划、代码开发、智能助教等方向的教育智能体应用成果。江苏开放大学于2025年8月引入平台，向20万师生开放使用，探索Agent在终身教育场景的应用，成为全国开放大学系统中AI赋能教学的示范样板",
+      "details": {
+        "launchTime": "2025年9月",
+        "positioning": "新一代教育超级入口，学、用、创、赛一站式学习生态",
+        "coreFunctions": [
+          "多智能体协作与资源调度：整合知识库、应用模板、生产力工具智能体",
+          "多类型智能体覆盖：教学、科研、专家、管理智能体",
+          "丰富教育工具：图像生成、视频生成、音乐生成、编程助手、论文检索"
+        ],
+        "technicalSupport": {
+          "agentInfra": ["Serverless秒级启动", "数万并发", "长期记忆管理"],
+          "models": ["混元大模型（生文、生图、生视频）"],
+          "computing": ["TACO推理加速", "RDMA星脉网络"]
+        },
+        "competitionCase": {
+          "date": "2025年9月",
+          "universities": ["北京大学", "清华大学", "复旦大学", "上海交通大学", "浙江大学", "南京大学", "中国科学技术大学", "西安交通大学"],
+          "stats": {
+            "teams": 64,
+            "participants": 109,
+            "outputs": 100
+          },
+          "outputDirections": ["学业规划", "代码开发", "智能助教"]
+        },
+        "successfulCases": [
+          {
+            "school": "江苏开放大学",
+            "deploymentDate": "2025年8月",
+            "coverage": "20万师生",
+            "focus": "Agent在终身教育场景的应用（成人职业技能提升、老年教育等）",
+            "achievement": "全国开放大学系统中AI赋能教学的示范样板",
+            "benefits": ["智能体自主规划与资源调度", "提升教学效率", "优化学习体验"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "case-006",
       "title": "AI百校行",
       "date": "2025-09",
       "partner": "全国约100所高校",
