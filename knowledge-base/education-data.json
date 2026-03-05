@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "version": "1.3",
+    "version": "1.5",
     "lastUpdated": "2025-03-06",
     "description": "腾讯教育石梅总演讲稿生成器知识库"
   },
@@ -119,7 +119,61 @@
     "strategies": [
       {
         "name": "All in AI，AI in All",
-        "components": ["AI Education", "AI for Education", "AI for Science"]
+        "description": "腾讯教育AI战略的完整布局，涵盖AI教育、AI赋能教育、AI赋能科学三大方向",
+        "components": [
+          {
+            "name": "AI Education",
+            "description": "人工智能教育，培养AI人才",
+            "goals": [
+              "培养学生对人工智能的兴趣",
+              "传授人工智能知识（机器学习、计算机视觉、自然语言处理等）",
+              "增强学生对人工智能的理解和批判性思维",
+              "为人工智能发展培养高层次专门人才"
+            ]
+          },
+          {
+            "name": "AI for Education",
+            "description": "AI赋能教育，提升教学效率与质量",
+            "applicationScenarios": [
+              {
+                "category": "个性化学习",
+                "applications": ["智能学伴", "精准学习", "AI助教"]
+              },
+              {
+                "category": "智能教学",
+                "applications": ["备课助手", "精准教学", "作业批改"]
+              },
+              {
+                "category": "数据决策",
+                "applications": ["学情分析", "智慧校园管理"]
+              },
+              {
+                "category": "一网通办服务",
+                "applications": ["招生助手", "就业助手"]
+              }
+            ]
+          },
+          {
+            "name": "AI for Science",
+            "description": "AI赋能科学研究，推动科研创新",
+            "typicalApplications": [
+              {
+                "name": "高性能应用服务(HAI)",
+                "description": "面向AI、科学计算的GPU应用服务，提供即插即用的算力与环境，助力LLM、AI作画、数据科学等高性能应用快速部署"
+              },
+              {
+                "name": "学科大模型",
+                "description": "垂直领域专业大模型",
+                "example": {
+                  "university": "上海海事大学",
+                  "modelName": "海商法大模型",
+                  "services": ["海法快答", "海法深问", "海法通译"],
+                  "application": "服务科研与教学"
+                }
+              }
+            ]
+          }
+        ]
       }
     ],
     "solutions": [
@@ -378,6 +432,30 @@
             "school": "首师大子期实验中学",
             "application": "'AI+生物'3D建模探索"
           }
+        ]
+      }
+    },
+    {
+      "id": "case-005",
+      "title": "AI百校行",
+      "date": "2025-09",
+      "partner": "全国约100所高校",
+      "content": "腾讯教育面向全国高校发起的线下推广行动，计划覆盖约100所高校，为高校师生提供多样化的AI学习与体验内容。聚焦人工智能在真实场景中的应用，结合腾讯的技术能力与产业资源，推动未来人才培养体系建设",
+      "results": "提升高校学生对前沿AI技术的理解与应用能力，促进产学融合与教育创新实践，与高校、科研机构、教育组织等合作伙伴共同推进AI教育生态建设，扩展技术普及和人才培养渠道",
+      "details": {
+        "launchTime": "2025年9月",
+        "coverage": "约100所高校",
+        "positioning": "面向全国高校的线下推广行动",
+        "focusAreas": [
+          "人工智能在真实场景中的应用",
+          "腾讯技术能力与产业资源结合",
+          "未来人才培养体系建设"
+        ],
+        "goals": [
+          "提升高校学生对前沿AI技术的理解与应用能力",
+          "促进产学融合与教育创新实践",
+          "与高校、科研机构、教育组织等合作伙伴共同推进AI教育生态建设",
+          "扩展技术普及和人才培养渠道"
         ]
       }
     }
