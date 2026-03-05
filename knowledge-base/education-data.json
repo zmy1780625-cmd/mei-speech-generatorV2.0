@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "version": "1.2",
+    "version": "1.3",
     "lastUpdated": "2025-03-06",
     "description": "腾讯教育石梅总演讲稿生成器知识库"
   },
@@ -29,17 +29,60 @@
       {
         "name": "腾讯教育智能体平台",
         "launchDate": "2025-09",
+        "positioning": "新一代教育超级入口，学、用、创、赛一站式学习平台",
+        "description": "通过Agent技术助力课堂教学模式创新，打造新一代学习平台",
+        "coreCapabilities": {
+          "multiAgent": {
+            "name": "多智能体协作与资源调度",
+            "features": ["多智能体自主规划", "智能体协作", "资源调度优化"]
+          },
+          "agentTypes": {
+            "categories": ["教学智能体", "科研智能体", "专家智能体", "管理智能体"],
+            "features": ["融合学科教育专家智慧", "提供权威专业解答"]
+          },
+          "resources": {
+            "components": ["知识库", "应用模版", "生产力工具智能体"],
+            "builtIn": "新一代全场景教育智能体"
+          },
+          "tools": {
+            "aiTools": ["图像生成", "视频生成", "音乐生成", "编程助手", "论文检索"],
+            "coverage": "教-学-管-研全场景"
+          }
+        },
+        "productValue": {
+          "positioning": "新一代教育超级入口",
+          "boundaryBreak": "打破传统教学边界",
+          "ecosystem": {
+            "integratedProducts": ["腾讯文档", "企业微信", "Cloud Studio"],
+            "seamlessExperience": ["课程学习", "实训工具", "知识管理", "创作分享"]
+          }
+        },
         "features": ["智能体创建", "多智能体协作", "教学场景适配"],
         "stats": {
-          "schools": 300,
+          "schools": 8,
           "teams": 64,
           "participants": 109,
-          "outputs": 100
-        }
+          "outputs": 100,
+          "outputDirections": ["学业规划", "代码开发", "智能助教"]
+        },
+        "competitionCases": {
+          "participatingUniversities": ["北京大学", "清华大学", "复旦大学", "上海交通大学", "浙江大学", "南京大学", "中国科学技术大学", "西安交通大学"],
+          "format": "智能体大赛",
+          "achievements": "100+教育智能体应用成果"
+        },
+        "successfulCases": [
+          {
+            "school": "江苏开放大学",
+            "deploymentDate": "2025-08",
+            "coverage": "20万师生",
+            "focus": "Agent在终身教育场景的应用",
+            "benefits": ["智能体自主规划与资源调度", "提升教学效率", "优化学习体验"]
+          }
+        ]
       },
       {
         "name": "青少年AIGC创作工坊",
-        "launchDate": "2025-08",
+        "launchDate": "2025-08-19",
         "description": "面向青少年的人工智能生成内容（AIGC）创作平台，旨在探索AIGC的无限潜力，帮助青少年掌握AI辅助下的数字创作能力",
         "position": "腾讯青少年人工智能教育方案的重要组成部分，是'四大AI实验室'之一（与AI体验馆、AI训练馆、AI竞技场并列）",
         "coreFeatures": [
@@ -58,19 +101,11 @@
         "successfulCases": [
           {
             "school": "北京师范大学附属中学",
-            "application": "开展智能体助力教学创新"
-          },
-           {
-            "school": "鄂尔多斯市杭锦旗龙子心小学",
-            "application": "开展“AI + 语文”学习活动，重塑对“母亲河”的认知"
-          },
-          {
-            "school": "区域普及案例——广州市",
-            "application": "为全市中小学提供包含虚拟仿真实验室的人工智能课程教学资源配套服务"
+            "application": "智能体助力教学"
           },
           {
             "school": "首师大子期实验中学",
-            "application": "学生开展“AI + 生物”3D建模探索人体奥秘"
+            "application": "'AI+生物'3D建模探索"
           }
         ],
         "stats": {
@@ -288,8 +323,8 @@
       "title": "同济大学大模型合作",
       "date": "2025",
       "partner": "同济大学",
-      "content": "同济-腾讯云大设计大模型联合创新实验室「TT设计学院」于2025年世界设计之都大会(WDCC)**正式发布",
-      "results": "首个拉通学科和产业全链路的设计大模型,旨在整合全球设计教育、研究和实践专家资源,打通学科和产业创新链路,以AI大模型赋能设计产业发"
+      "content": "围绕大模型核心展开大设计层面的深度协同创新",
+      "results": "共同规划面向智能教学场景的下一代教育大模型"
     },
     {
       "id": "case-002",
@@ -340,14 +375,6 @@
             "application": "智能体助力教学"
           },
           {
-            "school": "鄂尔多斯市杭锦旗龙子心小学",
-            "application": "开展“AI + 语文”学习活动，重塑对“母亲河”的认知"
-          },
-          {
-            "school": "区域普及案例——广州市",
-            "application": "为全市中小学提供包含虚拟仿真实验室的人工智能课程教学资源配套服务"
-          },
-          {
             "school": "首师大子期实验中学",
             "application": "'AI+生物'3D建模探索"
           }
@@ -378,8 +405,3 @@
     }
   ]
 }
-
-
-
-
-
