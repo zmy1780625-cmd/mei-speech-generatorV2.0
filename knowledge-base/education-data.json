@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "version": "1.6",
+    "version": "1.3",
     "lastUpdated": "2025-03-06",
     "description": "腾讯教育石梅总演讲稿生成器知识库"
   },
@@ -27,9 +27,57 @@
   "tencent_education": {
     "platforms": [
       {
+        "name": "腾讯教育智能体平台",
+        "launchDate": "2025-09",
+        "positioning": "新一代教育超级入口，学、用、创、赛一站式学习平台",
+        "description": "通过Agent技术助力课堂教学模式创新，打造新一代学习平台",
+        "coreCapabilities": {
+          "multiAgent": {
+            "name": "多智能体协作与资源调度",
+            "features": ["多智能体自主规划", "智能体协作", "资源调度优化"]
+          },
+          "agentTypes": {
+            "categories": ["教学智能体", "科研智能体", "专家智能体", "管理智能体"],
+            "features": ["融合学科教育专家智慧", "提供权威专业解答"]
+          },
+          "resources": {
+            "components": ["知识库", "应用模版", "生产力工具智能体"],
+            "builtIn": "新一代全场景教育智能体"
+          },
+          "tools": {
+            "aiTools": ["图像生成", "视频生成", "音乐生成", "编程助手", "论文检索"],
+            "coverage": "教-学-管-研全场景"
+          }
+        },
+        "productValue": {
+          "positioning": "新一代教育超级入口",
+          "boundaryBreak": "打破传统教学边界",
+          "ecosystem": {
+            "integratedProducts": ["腾讯文档", "企业微信", "Cloud Studio"],
+            "seamlessExperience": ["课程学习", "实训工具", "知识管理", "创作分享"]
+          }
+        },
+        "competitionCases": {
+          "participatingUniversities": ["北京大学", "清华大学", "复旦大学", "上海交通大学", "浙江大学", "南京大学", "中国科学技术大学", "西安交通大学"],
+          "format": "智能体大赛",
+          "achievements": "100+教育智能体应用成果"
+        },
+        "successfulCases": [
+          {
+            "school": "江苏开放大学",
+            "deploymentDate": "2025-08",
+            "coverage": "20万师生",
+            "focus": "Agent在终身教育场景的应用",
+            "benefits": ["智能体自主规划与资源调度", "提升教学效率", "优化学习体验"]
+          }
+        ]
+      },
+      {
         "name": "青少年AIGC创作工坊",
         "launchDate": "2025-08-19",
-        "description": "面向青少年的人工智能生成内容（AIGC）创作平台，旨在探索AIGC的无限潜力，帮助青少年掌握AI辅助下的数字创作能力",
+        "productNature": "腾讯自研产品",
+        "currentStats": "截至目前，已有超过300所学校、5000名师生使用，产生超过30000份学生作品",
+        "description": "腾讯自主研发的面向青少年的AIGC创作平台，基于腾讯混元及开源大模型，旨在探索AIGC的无限潜力，帮助青少年掌握AI辅助下的数字创作能力",
         "position": "腾讯青少年人工智能教育方案的重要组成部分，是'四大AI实验室'之一（与AI体验馆、AI训练馆、AI竞技场并列）",
         "coreFeatures": [
           "AI生文、AI绘画、AI视频、AI建模、AI音乐、AI编程与AI智能体等创作工具",
@@ -50,6 +98,14 @@
             "application": "智能体助力教学"
           },
           {
+            "school": "鄂尔多斯市杭锦旗龙子心小学",
+            "application": "开展“AI + 语文”学习活动，重塑对“母亲河”的认知"
+          },
+          {
+            "school": "区域普及案例——广州市",
+            "application": "为全市中小学提供包含虚拟仿真实验室的人工智能课程教学资源配套服务"
+          },
+          {
             "school": "首师大子期实验中学",
             "application": "'AI+生物'3D建模探索"
           }
@@ -57,7 +113,8 @@
         "stats": {
           "schools": 300,
           "teachersStudents": 5000,
-          "works": 30000
+          "works": 30000,
+          "note": "以上为截至目前的累计数据，非推出时数据"
         },
         "features": ["AI生文", "AI绘画", "AI视频", "AI建模", "AI音乐", "AI编程", "AI智能体"]
       }
@@ -65,61 +122,7 @@
     "strategies": [
       {
         "name": "All in AI，AI in All",
-        "description": "腾讯教育AI战略的完整布局，涵盖AI教育、AI赋能教育、AI赋能科学三大方向",
-        "components": [
-          {
-            "name": "AI Education",
-            "description": "人工智能教育，培养AI人才",
-            "goals": [
-              "培养学生对人工智能的兴趣",
-              "传授人工智能知识（机器学习、计算机视觉、自然语言处理等）",
-              "增强学生对人工智能的理解和批判性思维",
-              "为人工智能发展培养高层次专门人才"
-            ]
-          },
-          {
-            "name": "AI for Education",
-            "description": "AI赋能教育，提升教学效率与质量",
-            "applicationScenarios": [
-              {
-                "category": "个性化学习",
-                "applications": ["智能学伴", "精准学习", "AI助教"]
-              },
-              {
-                "category": "智能教学",
-                "applications": ["备课助手", "精准教学", "作业批改"]
-              },
-              {
-                "category": "数据决策",
-                "applications": ["学情分析", "智慧校园管理"]
-              },
-              {
-                "category": "一网通办服务",
-                "applications": ["招生助手", "就业助手"]
-              }
-            ]
-          },
-          {
-            "name": "AI for Science",
-            "description": "AI赋能科学研究，推动科研创新",
-            "typicalApplications": [
-              {
-                "name": "高性能应用服务(HAI)",
-                "description": "面向AI、科学计算的GPU应用服务，提供即插即用的算力与环境，助力LLM、AI作画、数据科学等高性能应用快速部署"
-              },
-              {
-                "name": "学科大模型",
-                "description": "垂直领域专业大模型",
-                "example": {
-                  "university": "上海海事大学",
-                  "modelName": "海商法大模型",
-                  "services": ["海法快答", "海法深问", "海法通译"],
-                  "application": "服务科研与教学"
-                }
-              }
-            ]
-          }
-        ]
+        "components": ["AI Education", "AI for Education", "AI for Science"]
       }
     ],
     "solutions": [
@@ -127,195 +130,104 @@
         "id": "solution-001",
         "name": "腾讯青少年人工智能教育解决方案",
         "type": "K12人工智能教育",
-        "publishDate": "2025年8月",
         "coverage": "小学低年级到高中全学段",
         "reach": "300多个城市、20000多所学校",
         "impact": "超过800万师生、3000万+AI实验与编程作品",
-        "monthlyActiveUsers": "上线仅1月即突破10万月活",
-        "description": "作为云+AI科技能力服务商，腾讯教育依托腾讯混元大模型、DeepSeek大模型的底层技术支撑，打造了'课程+工具+平台+赛事'四位一体青少年人工智能教育解决方案，覆盖小学低年级到高中全学段，打通'学-练-创-评'全链路，真正实现AI教育的可落地、可实践、可成果化。这套解决方案的核心优势，在于不依赖学校高端硬件、不要求教师专业AI背景、贴合国家课程标准，让普通学校也能轻松开展AI教育。",
-        "coreAdvantages": [
-          "不依赖学校高端硬件",
-          "不要求教师专业AI背景",
-          "贴合国家课程标准",
-          "普通学校也能轻松开展AI教育"
-        ],
-        "fourPlatforms": {
-          "title": "沉浸式、游戏化的学习体验",
-          "description": "针对学生的认知特点与学习习惯，腾讯打造了AI体验馆、AI训练馆、AI竞技场、专属教育支撑平台四大核心平台，从基础体验、模型训练、游戏化竞技、校园管理四个维度，为学校提供全场景的AI教育支撑，让学生在'玩中学、练中悟'",
-          "aiExperienceHall": {
-            "name": "AI体验馆",
-            "features": ["人脸验证", "AI围棋", "车辆识别", "识花君等轻量化AI能力体验"],
-            "value": "让学生直观理解AI的实现原理，零基础也能快速入门，降低AI学习的门槛"
-          },
-          "aiTrainingHall": {
-            "name": "AI训练馆",
-            "features": ["遗传算法", "决策树", "K-means等复杂AI知识可视化呈现"],
-            "value": "配合实验手册、步骤式引导，让学生亲手完成模型训练，理解AI应用背后的技术逻辑，从'知道AI'到'理解AI'"
-          },
-          "aiArena": {
-            "name": "AI竞技场",
-            "features": ["迷宫寻宝", "AI足球赛", "星际智旅等游戏化竞技项目"],
-            "value": "将Python编程、机器学习算法融入闯关游戏，让学生在趣味对抗中掌握编程与算法知识，提升学习的主动性与趣味性"
-          },
-          "educationSupportPlatform": {
-            "name": "专属教育支撑平台",
-            "functions": ["账号统管", "智能评价", "作业收发", "赛事管理一站式操作"],
-            "features": ["数据安全", "内容监管", "风险预警"],
-            "value": "让学校的AI教育管理更高效、更省心，也让家长更放心"
-          }
-        },
-        "interdisciplinaryIntegration": {
-          "title": "跨学科融合，让AI成为学科教学的'赋能工具'",
-          "description": "腾讯青少年人工智能教育解决方案打破学科壁垒，打造AI+语文/数学/美术/科学/地理等跨学科项目式学习模式，将AI工具与各学科教学深度融合，让AI不再是一门'单独的课程'，而是成为助力各学科教学的'赋能工具'",
-          "cases": [
+        "description": "面向全国各学龄段师生提供的以人工智能课程教学为核心的整体解决方案，旨在降低人工智能教学门槛，助力青少年人工智能教育的发展和普及",
+        "courseSystem": {
+          "structure": "阶梯式L1-L5五个等级",
+          "levels": [
             {
-              "subject": "语文课堂",
-              "application": "用AI生成古诗词互动游戏",
-              "value": "让学生在闯关连线中理解诗意、积累古诗词知识，让传统课堂更有趣"
+              "level": "L1-L2",
+              "target": "小学低年级",
+              "content": "趣味编程入门"
             },
             {
-              "subject": "科学课堂",
-              "application": "一键生成太阳系、电磁场动态模型",
-              "value": "将抽象的科学知识转化为直观的动画演示，解决'复杂概念难讲解'的问题"
+              "level": "L3",
+              "target": "小学高年级",
+              "content": "人工智能初级应用"
             },
             {
-              "subject": "美术课堂",
-              "application": "借助AI绘画、3D建模工具",
-              "value": "让学生的创意快速落地，提升学生的审美能力与创作能力"
-            },
-            {
-              "subject": "创客课堂",
-              "application": "依托腾讯混元Al-Hunyuan3D-V2.5",
-              "value": "秒级完成智能拓扑和纹理生成，还能一键3D打印，让学生亲手将创意变成实物，培养学生的动手能力与创新思维"
+              "level": "L4-L5",
+              "target": "初高中",
+              "content": "人工智能算法编程、创意应用"
             }
+          ],
+          "features": [
+            "紧扣国家信息科技课程标准",
+            "与教育部门、高校专家、一线教师共同研发",
+            "跨学科融合：AI与语文、数学、美术、科学等学科结合",
+            "项目式学习（PBL）：解决实际问题中应用AI技术"
           ]
         },
-        "outcomeChannels": {
-          "title": "以竞赛、课程和创作为出口，让学习成果可视化、可落地",
-          "description": "腾讯为学生搭建了竞赛、课程、创作三大成果出口，以赛促学、以课育才、以创赋能，让AI学习不再是'纸上谈兵'，而是能转化为实实在在的能力与成果",
-          "competitionTrack": {
-            "name": "竞赛赛道",
-            "description": "对接国家白名单相关权威赛事，为学生搭建高水平的能力展示平台，以竞赛激发学生的学习动力与探索欲"
-          },
-          "courseTrack": {
-            "name": "课程赛道",
-            "description": "推出L1-L5阶梯式体系课程，从趣味编程入门、人工智能初阶应用，到复杂AI算法编程、人工智能创意应用，循序渐进培养学生AI能力，课程内容紧扣国家信息科技课程标准，可直接纳入校本课程",
-            "levels": [
+        "platformsAndTools": {
+          "aiExperimentPlatform": {
+            "name": "AI实验平台",
+            "modules": [
               {
-                "level": "L1-L2",
-                "target": "小学低年级",
-                "content": "趣味编程入门"
+                "name": "AI体验馆",
+                "features": ["人脸验证", "AI围棋", "轻量化AI能力体验"]
               },
               {
-                "level": "L3",
-                "target": "小学高年级",
-                "content": "人工智能初级应用"
+                "name": "AI训练馆",
+                "features": ["可视化算法呈现", "理解AI模型与原理"]
               },
               {
-                "level": "L4-L5",
-                "target": "初高中",
-                "content": "人工智能算法编程、创意应用"
+                "name": "AI竞技场",
+                "features": ["AI足球赛", "迷宫寻宝", "Python编程与机器学习融入趣味对抗"]
               }
             ]
           },
-          "creationTrack": {
-            "name": "创作赛道",
-            "description": "打造青少年AIGC创作工坊，集成AI绘画、生文、视频、3D建模、音乐、编程6大创作工具，支持学生一站式完成AIGC创作，让学生将创意转化为数字绘本、3D模型、AI视频等实实在在的作品"
+          "programmingTools": {
+            "name": "腾讯扣叮",
+            "description": "自研国产IDE工具平台",
+            "features": ["图形化编程", "Python编程"],
+            "labs": ["创意实验室", "Python实验室", "硬件实验室", "小程序实验室等8大实验室"]
+          },
+          "virtualSimulation": {
+            "name": "虚拟仿真实验室",
+            "technology": "腾讯织梦游戏引擎，3D虚拟仿真技术",
+            "scenarios": ["航天工程", "极地科考", "机器人编程", "人工智能实验"],
+            "advantages": ["降低硬件成本", "适配学校机房和传统教室"]
           }
         },
-        "valueForSchool": {
-          "title": "助力学校低成本普及AI教育，打造特色办学名片",
-          "benefits": [
-            {
-              "title": "大幅降低落地成本",
-              "description": "产品适配学校机房与传统教室，无需建设昂贵的专用实验室，腾讯独特的3D虚拟仿真技术进一步降低硬件采购成本，让学校与机构也能轻松开展AI教育"
-            },
-            {
-              "title": "课程权威可直接落地",
-              "description": "课程由腾讯联合国家相关教育部门、高校AI专家、一线骨干教师共同研发，紧扣国家课程标准，学校无需额外研发，可直接纳入校本课程"
-            },
-            {
-              "title": "打造学校办学特色",
-              "description": "学生创作的数字绘本、3D模型、AI编程作品，以及竞赛获奖成果，可作为学校的特色教育成果展示，提升学校的办学影响力与品牌辨识度，打造差异化的办学特色"
-            }
-          ]
+        "teacherSupport": {
+          "trainingSystem": {
+            "description": "联合高校和教育专家提供教师培训",
+            "resources": ["线上线下培训课程", "教学案例库", "在线研讨平台"]
+          },
+          "managementTools": {
+            "name": "腾讯智启学堂",
+            "functions": ["备授课", "作业布置与批改", "学情分析", "班级管理"]
+          }
         },
-        "valueForTeachers": {
-          "title": "AI助手助力老师减负，实现教学能力'双向提升'",
-          "benefits": [
-            {
-              "title": "大幅提升备课效率",
-              "description": "借助AI教具生成功能，一句话就能创建知识演示动画、课堂互动游戏与随堂测验，将复杂概念转化为直观内容，解决教师'备课难、备课累'的问题"
-            },
-            {
-              "title": "教学管理更轻松",
-              "description": "专属平台支持作业收发、学情分析、赛事活动、教研研讨一站式管理，AI助手辅助教师完成日常教学工作，大幅减轻教师的工作负担"
-            },
-            {
-              "title": "配套师资培训体系",
-              "description": "腾讯为教师提供专业的培训课程、教学案例库、在线研讨平台，帮助教师快速提升AI工具使用能力与课程设计能力，实现教师教学能力的'双向提升'"
-            }
-          ]
+        "competitionsAndOutcomes": {
+          "events": {
+            "description": "对接国家白名单赛事",
+            "competitions": ["WRC青少年机器人设计大赛", "全国青少年信息素养大赛"]
+          },
+          "creationWorkshop": {
+            "name": "青少年AIGC创作工坊",
+            "tools": ["AI绘画", "AI生文", "AI视频", "AI 3D建模"],
+            "outputs": ["数字绘本", "AI视频", "3D模型"]
+          }
         },
-        "valueForStudents": {
-          "title": "让学生玩中学AI，成长为适应未来的'数字公民'",
-          "benefits": [
-            {
-              "title": "降低学习门槛，激发学习兴趣",
-              "description": "无需编程基础，像玩游戏一样学习AI工具，通过沉浸式、游戏化的学习体验，让学生从'怕学AI'到'爱学AI'"
-            },
-            {
-              "title": "培养综合创造力与跨学科能力",
-              "description": "在AIGC创作工坊完成从故事编写、角色设计到作品生成的全流程创作，同时通过跨学科项目式学习，培养学生的跨学科应用能力与创新思维"
-            },
-            {
-              "title": "提升核心素养，适配未来发展",
-              "description": "课程专门设置AI安全与伦理课时，教授AI使用规范，强化学生的科技责任感，培养学生'了解AI、合理使用AI、创新应用AI'的能力，助力学生成长为适应智能社会的未来数字公民"
-            }
-          ]
-        },
-        "technologyBase": ["腾讯混元大模型", "DeepSeek大模型"],
-        "fourInOne": ["课程", "工具", "平台", "赛事"],
-        "fullChain": ["学", "练", "创", "评"]
+        "ecosystem": {
+          "hardware": {
+            "description": "智能硬件开放平台",
+            "supportedDevices": ["Arduino", "Micro:bit", "机械臂等20多种主流硬件"]
+          },
+          "partners": {
+            "universities": ["北京大学", "北京师范大学"],
+            "institutions": ["学而思培优", "乐博乐博"]
+          }
+        }
       },
       {
         "id": "solution-002",
         "name": "腾讯高校人才培养方案",
         "type": "高等教育人才培养",
         "description": "腾讯与高校合作，围绕产业需求和教育数字化转型，培养创新型数字人才的综合体系",
-        "platform": {
-          "name": "腾讯教育智能体平台",
-          "launchDate": "2025-09",
-          "positioning": "新一代教育超级入口，学、用、创、赛一站式学习生态",
-          "description": "腾讯教育针对教育场景打造的AI原生平台，通过Agent技术推动课堂教学模式创新，构建新一代学习生态",
-          "targetAudience": "高等院校、终身教育、成人职业技能提升、老年教育",
-          "corePositioning": {
-            "goal": "新一代教育超级入口",
-            "boundaryBreak": "打破传统教学边界",
-            "ecosystemIntegration": {
-              "products": ["腾讯文档", "企业微信", "Cloud Studio"],
-              "seamlessExperience": ["课程学习", "实训工具", "知识管理", "创作分享"]
-            }
-          },
-          "coreFunctions": {
-            "multiAgentCollaboration": {
-              "name": "多智能体协作与资源调度",
-              "description": "内置新一代全场景教育智能体，整合知识库、应用模板、生产力工具智能体，支持多智能体自主规划与协作",
-              "coverage": "教-学-管-研全场景"
-            },
-            "agentTypes": {
-              "categories": ["教学智能体", "科研智能体", "专家智能体", "管理智能体"],
-              "features": ["融合学科教育专家智慧", "提供权威解答"],
-              "tools": ["图像生成", "视频生成", "音乐生成", "编程助手", "论文检索"]
-            }
-          },
-          "technicalSupport": {
-            "agentInfra": ["Serverless秒级启动", "数万并发", "长期记忆管理"],
-            "models": ["混元大模型（生文、生图、生视频等核心能力）"],
-            "computing": ["TACO推理加速", "RDMA星脉网络"]
-          },
-          "applicationScenarios": ["高校智能体大赛", "终身教育", "成人职业技能提升", "老年教育"]
-        },
         "coreComponents": [
           {
             "name": "产教融合课程共建",
@@ -411,7 +323,7 @@
   "cases": [
     {
       "id": "case-001",
-      "title": "同济大学大模型合作",
+      "title": "TT设计学院",
       "date": "2025",
       "partner": "同济大学",
       "content": "围绕大模型核心展开大设计层面的深度协同创新",
@@ -447,10 +359,12 @@
     {
       "id": "case-004",
       "title": "青少年AIGC创作工坊",
-      "date": "2025-08-19",
-      "partner": "北京师范大学附属中学、首师大子期实验中学等300所学校",
-      "content": "面向青少年的AIGC创作平台，基于腾讯混元及开源大模型，提供AI生文、AI绘画、AI视频、AI建模、AI音乐、AI编程与AI智能体等创作工具，支持跨学科项目式学习（PBL）",
-      "results": "服务超过300所学校、5000名师生，产生超过30000份学生作品；应用于校内课程、课后服务及科普竞赛等多种场景",
+      "productNature": "腾讯自研产品",
+      "launchDate": "2025-08-19",
+      "date": "2025",
+      "partner": "使用学校包括：北京师范大学附属中学、首师大子期实验中学等（非合作开发方）",
+      "content": "腾讯自主研发的面向青少年的AIGC创作平台，基于腾讯混元及开源大模型，提供AI生文、AI绘画、AI视频、AI建模、AI音乐、AI编程与AI智能体等创作工具，支持跨学科项目式学习（PBL）",
+      "results": "截至目前，已有超过300所学校、5000名师生使用该平台，产生超过30000份学生作品；应用于校内课程、课后服务及科普竞赛等多种场景",
       "details": {
         "coreModules": [
           "AI生文、AI绘画、AI视频、AI建模、AI音乐、AI编程与AI智能体",
@@ -469,72 +383,6 @@
             "school": "首师大子期实验中学",
             "application": "'AI+生物'3D建模探索"
           }
-        ]
-      }
-    },
-    {
-      "id": "case-005",
-      "title": "腾讯教育智能体平台使用案例",
-      "date": "2025-09",
-      "partner": "北京大学、清华大学、复旦大学、上海交通大学、浙江大学、南京大学、中国科学技术大学、西安交通大学、江苏开放大学等",
-      "content": "腾讯教育针对教育场景打造的AI原生平台，通过Agent技术推动课堂教学模式创新，构建'学、用、创、赛'一站式新一代学习生态。平台以'新一代教育超级入口'为目标，联动腾讯生态资源（腾讯文档、企业微信、Cloud Studio等），实现课程学习、实训工具、知识管理与创作分享的无缝衔接",
-      "results": "平台助力多所高校举办智能体大赛，吸引8所高校64支战队109名选手参与，产出100+涵盖学业规划、代码开发、智能助教等方向的教育智能体应用成果。江苏开放大学于2025年8月引入平台，向20万师生开放使用，探索Agent在终身教育场景的应用，成为全国开放大学系统中AI赋能教学的示范样板",
-      "details": {
-        "launchTime": "2025年9月",
-        "positioning": "新一代教育超级入口，学、用、创、赛一站式学习生态",
-        "coreFunctions": [
-          "多智能体协作与资源调度：整合知识库、应用模板、生产力工具智能体",
-          "多类型智能体覆盖：教学、科研、专家、管理智能体",
-          "丰富教育工具：图像生成、视频生成、音乐生成、编程助手、论文检索"
-        ],
-        "technicalSupport": {
-          "agentInfra": ["Serverless秒级启动", "数万并发", "长期记忆管理"],
-          "models": ["混元大模型（生文、生图、生视频）"],
-          "computing": ["TACO推理加速", "RDMA星脉网络"]
-        },
-        "competitionCase": {
-          "date": "2025年9月",
-          "universities": ["北京大学", "清华大学", "复旦大学", "上海交通大学", "浙江大学", "南京大学", "中国科学技术大学", "西安交通大学"],
-          "stats": {
-            "teams": 64,
-            "participants": 109,
-            "outputs": 100
-          },
-          "outputDirections": ["学业规划", "代码开发", "智能助教"]
-        },
-        "successfulCases": [
-          {
-            "school": "江苏开放大学",
-            "deploymentDate": "2025年8月",
-            "coverage": "20万师生",
-            "focus": "Agent在终身教育场景的应用（成人职业技能提升、老年教育等）",
-            "achievement": "全国开放大学系统中AI赋能教学的示范样板",
-            "benefits": ["智能体自主规划与资源调度", "提升教学效率", "优化学习体验"]
-          }
-        ]
-      }
-    },
-    {
-      "id": "case-006",
-      "title": "AI百校行",
-      "date": "2025-09",
-      "partner": "全国约100所高校",
-      "content": "腾讯教育面向全国高校发起的线下推广行动，计划覆盖约100所高校，为高校师生提供多样化的AI学习与体验内容。聚焦人工智能在真实场景中的应用，结合腾讯的技术能力与产业资源，推动未来人才培养体系建设",
-      "results": "提升高校学生对前沿AI技术的理解与应用能力，促进产学融合与教育创新实践，与高校、科研机构、教育组织等合作伙伴共同推进AI教育生态建设，扩展技术普及和人才培养渠道",
-      "details": {
-        "launchTime": "2025年9月",
-        "coverage": "约100所高校",
-        "positioning": "面向全国高校的线下推广行动",
-        "focusAreas": [
-          "人工智能在真实场景中的应用",
-          "腾讯技术能力与产业资源结合",
-          "未来人才培养体系建设"
-        ],
-        "goals": [
-          "提升高校学生对前沿AI技术的理解与应用能力",
-          "促进产学融合与教育创新实践",
-          "与高校、科研机构、教育组织等合作伙伴共同推进AI教育生态建设",
-          "扩展技术普及和人才培养渠道"
         ]
       }
     }
