@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梅总 · 演讲稿生成器</title>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root {
+    --blue-deep: #0052D9;
+    --blue-mid: #1677FF;
+    --blue-light: #E6F4FF;
+    --blue-bg: #F0F7FF;
+    --indigo: #4338CA;
+    --purple: #7C3AED;
+    --gold: #D4A843;
+    --dark: #1D2129;
+    --gray-text: #4E5969;
+    --gray-light: #C9CDD4;
+    --white: #FFFFFF;
+    --bg: #F3F4F8;
+    --shadow: 0 2px 16px rgba(0,40,120,0.07);
+    --shadow-lg: 0 8px 32px rgba(0,40,120,0.10);
+    --radius: 14px;
+    --glass-bg: rgba(255,255,255,0.65);
+    --glass-border: rgba(255,255,255,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--dark);
+    min-height: 100vh;
+    /* 微妙网格纹理背景 */
+    background-color: #F3F4F8;
+    background-image:
+      linear-gradient(rgba(0,82,217,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,82,217,0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* ========== Header: 毛玻璃 + 渐变 ========== */
+  .header {
+    background: linear-gradient(135deg, #0F2847 0%, #1E3A6E 25%, #2E4A8E 50%, #4338CA 75%, #6D28D9 100%);
+    padding: 26px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(124,58,237,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(22,119,255,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .header-logo {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+  .header-logo i { color: rgba(255,255,255,0.9); }
+  .header h1 {
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  /* ========== Main layout ========== */
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 40px 40px;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 28px;
+  }
+
+  /* ========== Left panel: 深色区块 ========== */
+  .left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ========== Cards: 毛玻璃 ========== */
+  .card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 24px;
+    transition: box-shadow 0.3s;
+  }
+  .card:hover { box-shadow: var(--shadow-lg); }
+
+  .card-dark {
+    background: linear-gradient(135deg, #0F1B2D 0%, #152238 50%, #1A2744 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #E2E8F0;
+  }
+  .card-dark .card-title { color: #E2E8F0; }
+  .card-dark .card-title::before { background: #818CF8; }
+  .card-dark .form-label { color: #94A3B8; }
+  .card-dark .form-label .hint { color: #64748B; }
+  .card-dark input, .card-dark textarea, .card-dark select {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.10);
+    color: #E2E8F0;
+  }
+  .card-dark input:focus, .card-dark textarea:focus {
+    border-color: #818CF8;
+    box-shadow: 0 0 0 3px rgba(129,140,248,0.15);
+  }
+  .card-dark input::placeholder, .card-dark textarea::placeholder { color: #64748B; }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--blue-deep);
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .card-title i { width: 18px; height: 18px; }
+
+  /* ========== Form ========== */
+  .form-group { margin-bottom: 18px; }
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-text);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .form-label .hint {
+    font-weight: 400;
+    color: var(--gray-light);
+    font-size: 11px;
+    margin-left: 4px;
+  }
+  input[type="text"], textarea, select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #E5E6EB;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--white);
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--blue-mid);
+    box-shadow: 0 0 0 3px rgba(22,119,255,0.08);
+  }
+  textarea { resize: vertical; line-height: 1.6; }
+
+  /* ========== Occasion pills: 线性图标 ========== */
+  .occasion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .occasion-pill {
+    padding: 12px 10px;
+    border: 1.5px solid rgba(255,255,255,0.10);
+    border-radius: 10px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: rgba(255,255,255,0.04);
+    color: #94A3B8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .occasion-pill i { width: 20px; height: 20px; stroke-width: 1.5; }
+  .occasion-pill:hover {
+    border-color: #818CF8;
+    color: #C7D2FE;
+    background: rgba(129,140,248,0.08);
+  }
+  .occasion-pill.active {
+    border-color: #818CF8;
+    background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(124,58,237,0.15));
+    color: #E0E7FF;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(129,140,248,0.15);
+  }
+
+  /* ========== Structure pills ========== */
+  .struct-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .struct-pill {
+    padding: 6px 14px;
+    border: 1.5px solid rgba(255,255,255,0.10);
+    border-radius: 20px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    color: #94A3B8;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .struct-pill i { width: 13px; height: 13px; stroke-width: 1.5; }
+  .struct-pill:hover { border-color: #818CF8; color: #C7D2FE; }
+  .struct-pill.active {
+    border-color: #818CF8;
+    background: rgba(129,140,248,0.12);
+    color: #C7D2FE;
+    font-weight: 600;
+  }
+
+  /* ========== Slider ========== */
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .slider-row input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.10);
+    outline: none;
+    border: none;
+    padding: 0;
+  }
+  .slider-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #818CF8;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(129,140,248,0.5);
+  }
+  .word-count-display {
+    font-size: 14px;
+    font-weight: 700;
+    color: #818CF8;
+    min-width: 55px;
+    text-align: right;
+  }
+
+  /* ========== Generate button ========== */
+  .btn-generate {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #4338CA, #6D28D9, #7C3AED);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-generate::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+  .btn-generate:hover::before { transform: translateX(100%); }
+  .btn-generate:hover { box-shadow: 0 4px 24px rgba(99,102,241,0.4); transform: translateY(-1px); }
+  .btn-generate:active { transform: translateY(0); }
+  .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-generate .spinner {
+    display: none;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ========== Right panel ========== */
+  .right-panel { display: flex; flex-direction: column; gap: 20px; }
+
+  /* ========== Preview ========== */
+  .preview-card {
+    flex: 1;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+  }
+  .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .preview-actions { display: flex; gap: 8px; }
+  .btn-action {
+    padding: 6px 14px;
+    border: 1.5px solid #E5E6EB;
+    border-radius: 8px;
+    background: var(--white);
+    font-size: 11px;
+    color: var(--gray-text);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .btn-action i { width: 13px; height: 13px; }
+  .btn-action:hover { border-color: var(--indigo); color: var(--indigo); }
+
+  .preview-content {
+    flex: 1;
+    padding: 28px 32px;
+    background: rgba(250,251,253,0.8);
+    border: 1px solid rgba(0,0,0,0.04);
+    border-radius: 10px;
+    overflow-y: auto;
+    line-height: 1.85;
+    font-size: 14.5px;
+    color: var(--dark);
+    position: relative;
+  }
+  .preview-content .placeholder {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--gray-light);
+  }
+  .placeholder-icon { margin-bottom: 12px; }
+  .placeholder-icon i { width: 48px; height: 48px; stroke-width: 1; color: #C9CDD4; }
+  .placeholder-text { font-size: 13px; line-height: 1.6; }
+
+  .preview-content h1 { font-size: 21px; text-align: center; margin-bottom: 4px; color: var(--dark); }
+  .preview-content .subtitle { text-align: center; color: var(--gray-text); font-size: 13px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #F0F0F0; }
+  .preview-content p { margin-bottom: 13px; text-indent: 2em; }
+  .preview-content p.no-indent { text-indent: 0; }
+  .preview-content .section-break { margin: 20px 0; text-align: center; color: var(--gray-light); letter-spacing: 4px; }
+  .preview-content strong { color: var(--indigo); }
+  .preview-content .signature { text-align: right; margin-top: 32px; padding-top: 16px; border-top: 1px solid #F0F0F0; color: var(--gray-text); font-size: 13px; font-style: italic; }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 20px;
+    padding: 12px 0 0;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    margin-top: 12px;
+  }
+  .stat-item {
+    font-size: 11px;
+    color: var(--gray-text);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .stat-item i { width: 13px; height: 13px; color: var(--indigo); }
+  .stat-item .num { font-weight: 700; color: var(--indigo); }
+
+  /* ========== Responsive ========== */
+  @media (max-width: 960px) {
+    .main { grid-template-columns: 1fr; padding: 16px; }
+    .header { padding: 18px 20px; }
+    .dna-group-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header: 毛玻璃+渐变 -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-logo"><i data-lucide="mic" style="width:22px;height:22px;"></i></div>
+    <h1>梅总 · 演讲稿生成器</h1>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <!-- Left: 深色配置面板 -->
+  <div class="left-panel">
+    <div class="card card-dark">
+      <div class="card-title"><i data-lucide="settings-2"></i> 演讲配置</div>
+
+      <!-- 场合 -->
+      <div class="form-group">
+        <div class="form-label">场合类型</div>
+        <div class="occasion-grid" id="occasionGrid">
+          <div class="occasion-pill active" data-val="conference">
+            <i data-lucide="globe"></i>全球大会
+          </div>
+          <div class="occasion-pill" data-val="partner">
+            <i data-lucide="handshake"></i>伙伴大会
+          </div>
+          <div class="occasion-pill" data-val="university">
+            <i data-lucide="graduation-cap"></i>高校发布会
+          </div>
+          <div class="occasion-pill" data-val="seminar">
+            <i data-lucide="book-open"></i>学术研讨会
+          </div>
+        </div>
+      </div>
+
+      <!-- 活动全称 -->
+      <div class="form-group">
+        <div class="form-label">活动全称 <span class="hint">选填，用于开场致辞场景</span></div>
+        <input type="text" id="eventName" placeholder="例：2026数字设计创新峰会启动会">
+      </div>
+
+      <!-- 演讲主题 -->
+      <div class="form-group">
+        <div class="form-label">演讲主题 <span class="hint">选填，用于主题演讲场景</span></div>
+        <input type="text" id="topic" placeholder="例：AIGC赋能数字化设计变革">
+        <div style="font-size:11px;color:#64748B;margin-top:4px;">💡 活动全称与演讲主题至少填写一项</div>
+      </div>
+
+      <!-- 称呼 -->
+      <div class="form-group">
+        <div class="form-label">现场听众称呼 <span class="hint">选填</span></div>
+        <input type="text" id="audience" placeholder="例：各位专家、各位校长、老师们">
+      </div>
+
+      <!-- 论述结构 -->
+      <div class="form-group">
+        <div class="form-label">论述结构</div>
+        <div class="struct-options" id="structOptions">
+          <div class="struct-pill active" data-val="policy"><i data-lucide="landmark"></i> 政策呼应</div>
+          <div class="struct-pill" data-val="review"><i data-lucide="bar-chart-3"></i> 成果回顾</div>
+          <div class="struct-pill" data-val="product"><i data-lucide="rocket"></i> 产品发布</div>
+          <div class="struct-pill" data-val="collab"><i data-lucide="users"></i> 合作描述</div>
+          <div class="struct-pill" data-val="vision"><i data-lucide="telescope"></i> 战略展望</div>
+        </div>
+      </div>
+
+      <!-- 补充要点 -->
+      <div class="form-group">
+        <div class="form-label">补充要点 <span class="hint">选填</span></div>
+        <textarea id="extras" rows="2" placeholder="如合作方名称、发布产品等"></textarea>
+      </div>
+
+      <!-- 字数 -->
+      <div class="form-group">
+        <div class="form-label">目标字数</div>
+        <div class="slider-row">
+          <input type="range" id="wordCount" min="600" max="2000" step="100" value="1000">
+          <span class="word-count-display" id="wordCountDisplay">1000字</span>
+        </div>
+      </div>
+
+      <!-- 生成按钮 -->
+      <button class="btn-generate" id="btnGenerate" onclick="generateSpeech()">
+        <span class="spinner" id="spinner"></span>
+        <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+        <span id="btnText">生成演讲稿</span>
+      </button>
+    </div>
+
+
+  </div>
+
+  <!-- Right: Preview -->
+  <div class="right-panel">
+    <div class="card preview-card">
+      <div class="preview-header">
+        <div class="card-title" style="margin-bottom:0;"><i data-lucide="file-text"></i> 演讲稿预览</div>
+        <div class="preview-actions" id="previewActions" style="display:none;">
+          <button class="btn-action" onclick="copySpeech()"><i data-lucide="copy"></i> 复制</button>
+          <button class="btn-action" onclick="downloadSpeech()"><i data-lucide="download"></i> .md</button>
+          <button class="btn-action" onclick="downloadTxt()"><i data-lucide="file-text"></i> .txt</button>
+        </div>
+      </div>
+      <div class="preview-content" id="previewContent">
+        <div class="placeholder">
+          <div class="placeholder-icon"><i data-lucide="mic"></i></div>
+          <div class="placeholder-text">填写左侧参数后点击「生成演讲稿」<br>Skill引擎将基于石梅表达DNA自动生成</div>
+        </div>
+      </div>
+      <div class="stats-bar" id="statsBar" style="display:none;">
+        <div class="stat-item"><i data-lucide="type"></i> 字数：<span class="num" id="statWords">0</span></div>
+        <div class="stat-item"><i data-lucide="clock"></i> 时长：<span class="num" id="statTime">0</span> 分钟</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===================== GLM API Configuration =====================
+const GLM_API_KEY = localStorage.getItem('glm_api_key') || '';
+const GLM_API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
+const GLM_MODEL = 'glm-4-plus';
+
+function getApiKey() {
+  let key = localStorage.getItem('glm_api_key') || '';
+  if (!key) {
+    key = prompt('请输入你的智谱 GLM API Key（在 open.bigmodel.cn 获取）\n格式如：xxxxxxxx.yyyyyyyy\n\n输入后会保存到浏览器本地，下次无需重复输入。');
+    if (key && key.includes('.')) {
+      localStorage.setItem('glm_api_key', key);
+    } else {
+      alert('API Key 格式不正确，请重试');
+      return null;
+    }
+  }
+  return key;
+}
+
+// ===================== SKILL.md System Prompt =====================
+const SYSTEM_PROMPT = `你是石梅，腾讯云副总裁、腾讯教育负责人。你需要完全以石梅的身份、口吻和表达方式来撰写演讲稿。
+
+以下是你的完整认知框架和表达DNA（基于4篇一手演讲稿深度蒸馏）：
+
+## 身份与定位
+- 身份：腾讯云副总裁、腾讯教育负责人
+- 核心领域：教育科技、产教融合、AI+教育、教育智能体
+- 思维风格：务实稳健、生态共建、长期主义、政策敏锐
+- 标志性理念：科技助教、连接兴学、专业为育 | All in AI, AI in All
+
+## 心智模型
+1. "All in AI, AI in All" 双轮驱动：腾讯自身All in AI全面转向，推动行业AI in All全场景渗透
+2. "LACC" 学用创赛一体化：Learning→Application→Creation→Competition闭环，"以赛促学、以赛促用、以赛促创"
+3. "科技助教"边界定位：科技是助手非替代者。自我定位为"共建者"（面向高校）、"同道者"（面向伙伴）、"科研协助者"（面向科研）
+4. "倒推式"产教融合：从产业出口需求倒推人才培养入口
+5. "通用→学科"大模型递进：通用大模型→学科大模型→智能体应用
+
+## 固定表达模块（必须直接复用）
+- 腾讯使命：'腾讯作为一家"用户为本，科技向善"为使命的科技公司'
+- 教育愿景：'用数字科技，让教育更富创造力'
+- 价值主张（三句九字）：'科技助教、连接兴学、专业为育'
+- 业务模式：'All in AI, AI in All'
+- 标准自我介绍段（3/4篇出现，几乎逐字一致）：'腾讯作为一家"用户为本，科技向善"为使命的科技公司，我们一直致力于通过数字化工具助力各行各业实现数字化转型。在教育领域，我们希望"用数字科技，让教育更富创造力"，我们始终坚持科技助教、连接兴学、专业为育的价值主张，依托腾讯云丰富的基础产品能力以及AI、连接方面的优势，服务于教育的数字化转型和高质量发展。'
+
+## 开场DNA
+1. 精准称呼（根据场合调整）
+2. "我是腾讯教育石梅"（简洁直接）
+3. "非常荣幸……"（必用）
+4. 代表感谢
+
+## 论述DNA
+- 政策呼应型：国家政策引用→"腾讯积极响应"→具体行动→成果展示
+- 成果回顾型：时间节点+产品/事件+关键数据→逐条呈现
+- 产品发布型：行业趋势→合作背景→产品核心→行业愿景
+- 合作描述型：腾讯提供什么+高校提供什么→共同目标
+
+## 数据引用（必须使用精确数据）
+- AIGC创作工坊：覆盖全国300多所学校，服务5000余名师生，累计产出3万余件AIGC作品
+- 教育智能体平台：提供专家智能体、工具智能体、知识库、课程资源和赛事五大核心模块，汇聚上百个专家智能体和工具智能体
+- TT设计学院超级智能体：汇聚百位设计专家知识（同济大学合作）
+- 海商法大模型：国内首个面向海事法律领域的专业大模型（上海海事大学合作）
+- AI百校行：近26所高校师生零距离体验AI
+- 智能体大赛：8所高校、64支战队、109名选手，产出100+教育智能体应用成果
+- HAI智算服务+Cloud Studio：开箱即用、按需计量的高性能智算+AI编程助手
+
+## 合作案例
+- 同济大学：大设计大模型→TT设计学院超级智能体、灵感口袋
+- 上海海事大学：海商法大模型+"海法深问"+"海法快答"智能体+云端海事双平台
+- 北师大附中：智能体教学创新，AIGC创作工坊教学试点
+- 横琴粤澳合作区："AI+生物"3D建模，跨学科AIGC教学
+
+## 2026年四大方向
+1. 构建更多AI Tutor场景
+2. 深化智能体应用在更多学科落地
+3. 加快青少年AI通识普及
+4. 扩大生态合作范围
+
+## 高频句式
+- 趋势："当前，我们正站在一场由人工智能驱动的教育变革浪潮之巅"
+- 趋势："AI不再是遥远的概念，而是正在重构教与学的生态"
+- 合作："我们愿意与各位伙伴携手同行"
+- 合作："以开放的心态、务实的行动，探索……更多可能"
+- 结语："共同书写教育创新发展的新篇章"
+- 结语固定："预祝本次活动圆满成功！""谢谢大家！"
+
+## 情感色彩词
+- 感恩：鼎力支持、卓越贡献、并肩同行
+- 愿景：携手同行、共创、共建
+- 趋势：势不可挡、澎湃之势、跨越式发展
+- 谦逊：开放的心态、务实的行动
+
+## 反模式（你绝不会做的事）
+- ❌ 自称"做教育的" → ✅ "科技助教"、"共建者"
+- ❌ 独建所有内容 → ✅ "腾讯出技术底座，高校出教育内涵"
+- ❌ 空谈概念无数据 → ✅ 每段必有具体数字和案例
+- ❌ 忽略政策方向 → ✅ 主动引用教育部政策
+- ❌ 做一锤子买卖 → ✅ "深度、持久"合作
+- ❌ 技术炫技 → ✅ 场景驱动、解决真实问题
+
+## 致辞稿标准结构
+一、开场（~100字）：精准称呼+"我是腾讯教育石梅"+荣幸表达+代表感谢
+二、腾讯教育定位（~150字）："用户为本，科技向善"→教育愿景→三句九字
+三、行业趋势/政策背景（~150字）：政策引用或AI教育趋势判断
+四、核心内容（~500-1000字）：根据场合选择论述模式
+五、结语（~100字）：合作愿景+感谢+"预祝……圆满成功！谢谢大家！"
+
+## 不同场合调性
+- 全球大会：正式+全景，战略布局+政策呼应
+- 合作伙伴大会：温暖+感恩，成果回顾+未来方向
+- 高校发布会：专业+合作，产品发布+双方互补
+- 学术研讨会：学术+敬重，技术愿景+深度合作`;
+
+// ===================== UI Logic =====================
+let selectedOccasion = 'conference';
+let selectedStruct = 'policy';
+let generatedText = '';
+let abortController = null;
+
+const OCCASION_LABELS = { conference: '全球大会/生态大会', partner: '合作伙伴大会', university: '高校发布会', seminar: '学术研讨会' };
+const STRUCT_LABELS = { policy: '政策呼应型', review: '成果回顾型', product: '产品发布型', collab: '合作描述型', vision: '战略展望型' };
+
+document.getElementById('occasionGrid').addEventListener('click', e => {
+  const pill = e.target.closest('.occasion-pill');
+  if (!pill) return;
+  document.querySelectorAll('#occasionGrid .occasion-pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  selectedOccasion = pill.dataset.val;
+});
+
+document.getElementById('structOptions').addEventListener('click', e => {
+  const pill = e.target.closest('.struct-pill');
+  if (!pill) return;
+  document.querySelectorAll('#structOptions .struct-pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  selectedStruct = pill.dataset.val;
+});
+
+document.getElementById('wordCount').addEventListener('input', e => {
+  document.getElementById('wordCountDisplay').textContent = e.target.value + '字';
+});
+
+// ===================== GLM API Streaming Generation =====================
+async function generateSpeech() {
+  const topic = document.getElementById('topic').value.trim();
+  const eventName = document.getElementById('eventName').value.trim();
+
+  if (!topic && !eventName) {
+    alert('请至少填写「活动全称」或「演讲主题」中的一项');
+    return;
+  }
+
+  const audience = document.getElementById('audience').value.trim() || '';
+  const extras = document.getElementById('extras').value.trim() || '';
+  const targetWords = parseInt(document.getElementById('wordCount').value);
+
+  // 判断场景类型
+  const isOpeningOnly = eventName && !topic;  // 仅填活动全称 → 开场致辞
+  const isTopicOnly = topic && !eventName;     // 仅填主题 → 主题演讲
+  const displayTitle = topic || eventName;
+  const displaySubtitle = eventName ? `——${eventName}致辞` : `——主题演讲`;
+
+  const btn = document.getElementById('btnGenerate');
+  const spinner = document.getElementById('spinner');
+  const btnText = document.getElementById('btnText');
+  const preview = document.getElementById('previewContent');
+
+  // Abort previous request if still running
+  if (abortController) abortController.abort();
+  abortController = new AbortController();
+
+  // Get API Key
+  const apiKey = getApiKey();
+  if (!apiKey) return;
+
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+  btnText.textContent = 'AI 生成中...';
+  preview.innerHTML = '<p style="color:#94A3B8;text-align:center;margin-top:40px;">正在调用 GLM-4 大模型，以石梅视角生成演讲稿...<br><br><span style="font-size:24px;">✍️</span></p>';
+  generatedText = '';
+
+  // Build user prompt — 根据填写情况自适应
+  let taskDesc;
+  if (isOpeningOnly) {
+    taskDesc = `请以石梅的身份和口吻，为「${eventName}」撰写一篇约${targetWords}字的开场致辞。这是一个活动开场致辞场景，重点是代表腾讯教育表达对活动的祝贺、感谢和期待。`;
+  } else if (isTopicOnly) {
+    taskDesc = `请以石梅的身份和口吻，撰写一篇约${targetWords}字的主题演讲稿，演讲主题为「${topic}」。这是一个主题演讲场景，重点围绕主题展开深入论述。`;
+  } else {
+    taskDesc = `请以石梅的身份和口吻，为「${eventName}」撰写一篇约${targetWords}字的致辞/演讲稿，演讲主题为「${topic}」。`;
+  }
+
+  const userPrompt = `${taskDesc}
+
+**活动全称**：${eventName || '（未指定，请根据主题自行拟定合适的场合描述）'}
+**演讲主题**：${topic || '（未指定具体主题，请围绕活动本身进行致辞）'}
+**场合类型**：${OCCASION_LABELS[selectedOccasion]}
+**论述结构**：${STRUCT_LABELS[selectedStruct]}
+**现场听众**：${audience || '根据场合类型自行判断'}
+${extras ? '**补充要点**：' + extras : ''}
+
+要求：
+1. 严格遵循石梅的表达DNA和致辞稿标准结构
+2. 必须包含标准自我介绍段（使命+愿景+三句九字）
+3. 必须引用至少2个真实案例和精确数据
+4. 开场用"我是腾讯教育石梅"
+5. 结语必须有"预祝……圆满成功！谢谢大家！"
+6. 约${targetWords}字
+7. 直接输出演讲稿正文，不要加标题、不要加markdown格式符号`;
+
+  try {
+    const response = await fetch(GLM_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiKey
+      },
+      body: JSON.stringify({
+        model: GLM_MODEL,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: userPrompt }
+        ],
+        stream: true,
+        temperature: 0.7,
+        top_p: 0.9,
+        max_tokens: 4096
+      }),
+      signal: abortController.signal
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error('API请求失败: ' + response.status + ' - ' + errText);
+    }
+
+    // Stream reading
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    preview.innerHTML = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith('data:')) continue;
+        const data = trimmed.slice(5).trim();
+        if (data === '[DONE]') continue;
+
+        try {
+          const json = JSON.parse(data);
+          const delta = json.choices?.[0]?.delta?.content;
+          if (delta) {
+            generatedText += delta;
+            // Render with basic formatting
+            preview.innerHTML = formatSpeech(generatedText);
+            preview.scrollTop = preview.scrollHeight;
+          }
+        } catch (e) { /* skip malformed chunks */ }
+      }
+    }
+
+    // Final render
+    preview.innerHTML = formatSpeech(generatedText);
+    updateStats(generatedText);
+    document.getElementById('previewActions').style.display = 'flex';
+    document.getElementById('statsBar').style.display = 'flex';
+    btnText.textContent = '重新生成';
+
+  } catch (e) {
+    if (e.name === 'AbortError') return;
+    console.error('GLM API Error:', e);
+    preview.innerHTML = `<p style="color:#EF4444;text-align:center;margin-top:40px;">⚠️ 生成失败<br><br><span style="font-size:13px;color:#94A3B8;">${e.message}</span></p>`;
+    btnText.textContent = '重试';
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    abortController = null;
+  }
+}
+
+// ===================== Format Speech Text → HTML =====================
+function formatSpeech(text) {
+  let html = '';
+  const lines = text.split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      html += '<br>';
+      continue;
+    }
+    // Bold markers
+    let formatted = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // Detect bullet points
+    if (/^[•·\-]\s/.test(trimmed) || /^\d+[\.、]\s?/.test(trimmed)) {
+      html += `<p class="no-indent">${formatted}</p>`;
+    } else if (trimmed.startsWith('---')) {
+      html += '<div class="section-break">· · ·</div>';
+    } else {
+      html += `<p>${formatted}</p>`;
+    }
+  }
+  return html;
+}
+
+// ===================== Stats =====================
+function updateStats(text) {
+  const words = text.replace(/[\s\n]/g, '').length;
+  document.getElementById('statWords').textContent = words;
+  document.getElementById('statTime').textContent = Math.round(words / 180);
+}
+
+// ===================== Export =====================
+function copySpeech() {
+  navigator.clipboard.writeText(generatedText).then(() => {
+    const btn = event.target.closest('.btn-action');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="check"></i> 已复制';
+    lucide.createIcons();
+    setTimeout(() => { btn.innerHTML = orig; lucide.createIcons(); }, 1500);
+  });
+}
+
+function getFileName() {
+  return document.getElementById('topic').value.trim() || document.getElementById('eventName').value.trim() || '演讲稿';
+}
+function downloadSpeech() {
+  const t = getFileName();
+  const b = new Blob(['# ' + t + '\n\n' + generatedText + '\n\n---\n*石梅 | 腾讯云副总裁、腾讯教育负责人*\n'], { type: 'text/markdown' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = t + '_石梅致辞稿.md'; a.click();
+}
+function downloadTxt() {
+  const t = getFileName();
+  const b = new Blob([generatedText], { type: 'text/plain' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = t + '_石梅致辞稿.txt'; a.click();
+}
+
+// Init Lucide icons
+document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+</script>
+</body>
+</html>
