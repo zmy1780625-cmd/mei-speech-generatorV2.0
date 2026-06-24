@@ -409,6 +409,88 @@
   .stat-item i { width: 13px; height: 13px; color: var(--indigo); }
   .stat-item .num { font-weight: 700; color: var(--indigo); }
 
+  /* ========== 交互修改面板 ========== */
+  .modify-card {
+    animation: slideUp 0.4s ease-out;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .modify-chat {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 12px;
+    background: rgba(250,251,253,0.8);
+    border: 1px solid rgba(0,0,0,0.04);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .modify-msg {
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 88%;
+  }
+  .modify-msg.user {
+    background: linear-gradient(135deg, #4338CA, #6D28D9);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .modify-msg.assistant {
+    background: white;
+    color: var(--dark);
+    align-self: flex-start;
+    border: 1px solid #E5E6EB;
+    border-bottom-left-radius: 4px;
+  }
+  .modify-msg .msg-label {
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    opacity: 0.7;
+  }
+  .modify-input-area {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .modify-input-area textarea {
+    flex: 1;
+    resize: none;
+    min-height: 42px;
+  }
+  .btn-modify {
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #4338CA, #6D28D9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .btn-modify:hover { box-shadow: 0 4px 16px rgba(99,102,241,0.3); }
+  .btn-modify:disabled { opacity: 0.5; cursor: not-allowed; }
+  .spinner-modify {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: inline-block;
+  }
+
   /* ========== Responsive ========== */
   @media (max-width: 960px) {
     .main { grid-template-columns: 1fr; padding: 16px; }
@@ -544,6 +626,19 @@
         <div class="stat-item"><i data-lucide="clock"></i> 时长：<span class="num" id="statTime">0</span> 分钟</div>
       </div>
     </div>
+
+    <!-- 交互修改面板 -->
+    <div class="card modify-card" id="modifyCard" style="display:none;">
+      <div class="card-title"><i data-lucide="message-square"></i> 交互修改</div>
+      <div class="modify-chat" id="modifyChat"></div>
+      <div class="modify-input-area">
+        <textarea id="modifyInput" placeholder="输入修改要求，如：把开头改得更有感染力、增加关于AI Tutor的内容..." rows="2"></textarea>
+        <button class="btn-modify" id="btnModify" onclick="modifySpeech()">
+          <span class="spinner-modify" id="spinnerModify" style="display:none;"></span>
+          <i data-lucide="send"></i> 修改
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -643,13 +738,13 @@ const SYSTEM_PROMPT = `# 角色设定
 
 当下，人工智能正以澎湃之势，全方位重塑着我们的社会生态，教育领域更是深受其影响。教育部怀进鹏部长在前几日国家教育行政学院开学典礼上强调："加快教育大模型建设与"人工智能+教育"场景创新，加强对学生数字素养和人工智能应用能力的培养，将数字技能融入各学段教育教学全过程。"
 
-腾讯作为长期深耕科技与教育领域的一员，积极响应国家政策，在人工智能教育方向聚焦发力，以"All in AI，AI in All"业务模式，围绕"AI Education、"AI for Education"和"AI for Science"三个方面持续耕耘。
+腾讯作为长期深耕科技与教育领域的一员，积极响应国家政策，聚焦人工智能教育方向，通过产品创新和生态合作，推动AI技术在教育场景的落地应用。
 
-在AI Education方面，腾讯始终倡导练学一体和产学一体的理念，将理论学习与实训结合。腾讯联合教育专家、一线教师，精心打造了涵盖小学低年级感知体验、高年级理解应用的全学段课程内容，以"AIGC创作工坊"为教学练习平台，通过AI生文、AI绘画、AI视频、AI建模、AI音乐等功能，和AI+科学创意案例项目，体验最新的科技能力，生动有趣的揭开人工智能的神秘面纱。
+在青少年AI通识教育方面，腾讯联合教育专家、一线教师，精心打造了涵盖小学低年级感知体验、高年级理解应用的全学段课程内容，以"AIGC创作工坊"为教学练习平台，通过AI生文、AI绘画、AI视频、AI建模、AI音乐等功能，和AI+科学创意案例项目，体验最新的科技能力，生动有趣的揭开人工智能的神秘面纱。
 
-在AI for Education方面，腾讯前瞻性布局教育Agentic AI方向，潜心打造腾讯教育超级智能体，将大模型、Agent技术与教育场景深度耦合，在提供智能体创建能力的同时，还提供设计专家点评、论文索引、论文精读等多智能体协作服务。腾讯教育超级智能体还将接入的腾讯自有版权的数百节AIGC通识、实训课程免费开放，助推师生的人工智能素养提升。
+在教育智能体方向，腾讯前瞻性布局Agentic AI，潜心打造腾讯教育超级智能体，将大模型、Agent技术与教育场景深度耦合，在提供智能体创建能力的同时，还提供设计专家点评、论文索引、论文精读等多智能体协作服务。腾讯教育超级智能体还将接入腾讯自有版权的数百节AIGC通识、实训课程免费开放，助推师生的人工智能素养提升。
 
-在AI for Science方面，腾讯定位科研协助者，提供各类AI辅助工具。为解决科研工作者计算环境搭建的额外工作，基于科研周期特性，提供开箱即用的、按需计量的高性能应用智算服务（HAI）。还有集成AI编程助手的在线编程IDE产品Cloud Studio等工具，都在协助科研工作者提升科研效率。
+在科研助力方面，腾讯定位科研协助者，提供各类AI辅助工具。为解决科研工作者计算环境搭建的额外工作，基于科研周期特性，提供开箱即用的、按需计量的高性能应用智算服务（HAI）。还有集成AI编程助手的在线编程IDE产品Cloud Studio等工具，都在协助科研工作者提升科研效率。
 
 腾讯接下来将围绕"以赛促学"、"以赛促用"、"以赛促创"的宗旨举办系列的校园AI赛事活动，持续迭代"LACC"一站式教育智能体平台，充分将自身在技术、资源、平台等方面的优势结合到学（Learning）、用（Application）、创（Creation）、赛（Competition）教育场景中来。
 
@@ -665,9 +760,9 @@ const SYSTEM_PROMPT = `# 角色设定
 
 首先，我代表腾讯教育全体同仁，对各位合作伙伴一直以来的鼎力支持、卓越贡献与并肩同行，表示最诚挚的感谢！
 
-回望2025年，AI渗透了教学、管理的各个场景，实现了从技术探索到规模化应用的跨越式发展，我们见证了很多客户、伙伴AI原生教育场景的成功实践，无论是试题解析讲解的智能化提效，还是AI教师实现的个性化和沉浸感教学互动，再到AI通识融入跨学科教学的人才培养模式创新，都说明教育业务以"AI in All"的模式在开展。
+回望2025年，AI渗透了教学、管理的各个场景，实现了从技术探索到规模化应用的跨越式发展，我们见证了很多客户、伙伴AI原生教育场景的成功实践，无论是试题解析讲解的智能化提效，还是AI教师实现的个性化和沉浸感教学互动，再到AI通识融入跨学科教学的人才培养模式创新，都说明教育业务以AI为核心在开展。
 
-过去一年，腾讯教育也调整业务方向，执行"All in Ai"的策略，持续在教育AI方向聚焦发力，围绕"AI for Education"、"AI Education"、和"AI for Science"三个方向持续耕耘，并且也取得了一定的实践成果。
+过去一年，腾讯教育也调整业务方向，持续在教育AI方向聚焦发力，并且取得了一定的实践成果。
 
 25年8月，腾讯青少年AIGC创作工坊辅助教学平台正式发布，短短两个月就覆盖全国300多所学校，服务5000余名师生，累计产出3万余件AIGC作品。从北京师范大学附属中学的智能体教学创新，到横琴粤澳深度合作区的"AI+生物"3D建模项目，再到乌镇青少年科技嘉年华的一站式AIGC体验，我们看到了AI技术正在激发青少年的创造力与学习热情。
 
@@ -675,7 +770,7 @@ const SYSTEM_PROMPT = `# 角色设定
 
 同在9月，与同济大学合作一年的大设计大模型正式发布，汇聚百位设计专家知识，精调出TT设计学院超级智能体。25年10月，与上海海事大学联合推出了海商法学科大模型，国内首个面向海事法律领域的专业大模型。
 
-过去一年，我们也积极推动AI走进校园，"AI百校行"活动已经让近26所高校师生零距离体验AI的魅力。
+过去一年，我们也积极推动AI走进校园，让高校师生零距离体验AI的魅力。
 
 2026年，腾讯教育将在以下四个方向持续投入：第一，构建更多AI Tutor场景；第二，深化智能体应用；第三，加快青少年AI通识普及；第四，扩大生态合作范围。
 
@@ -713,6 +808,72 @@ const SYSTEM_PROMPT = `# 角色设定
 
 预祝本次学术研讨会圆满成功！谢谢大家！
 
+## 范文5：2026年AI应用产业大会教育专场发言稿（最新风格参考）
+
+各位老师好。
+
+人才培养要从灌输走向自主建构，教与学要从单向走向协同，知识要从静态走向活水——这些方向，在座的大家都清楚，已经不需要再论证了。
+
+今天真正的问题不是"要不要变"，而是**"怎么变"**。方向有了，路径在哪？谁来铺这条路？
+
+作为科技公司，我们的回答很明确：用AI native的方式，来支撑这场范式变化。不是在旧系统上贴AI标签，是从底层重新设计。
+
+下面我从三个方向讲LearnBuddy是怎么做的。
+
+**第一，人才培养：AI native 意味着 1:1 不是理想，是工程问题**
+
+传统的个性化教学为什么推不动？因为1:1师生比在物理世界不可能实现。这不是理念问题，是资源约束问题。
+
+AI native的思路是：不要试图改变师生比，而是把"师"这个变量重新定义。一位教授的专家分身，可以同时陪100个学生学习，每个学生得到的都是基于教授方法论的个性化指导——7×24在线，课前规划方向，课中深度追问，课后归因沉淀。
+
+这不是通用大模型套个提示词。教授本人参与共创、授权、校准，思维链可复现，对话有出处可迭代。区别在哪？通用大模型能回答问题，但不会启发你问下一个问题。专家分身能，因为它继承的是教授的认知路径，不只是知识库。
+
+**第二，教与学：AI native 不是给老师减负，是重构教的边界**
+
+"AI给老师减负"这句话说了很久了。但减负之后呢？批改少了，老师多出来的时间干什么？
+
+AI native的回答是：不是减负，是重新划定人机分工的边界。分身做常驻的事——日常答疑、阶段反馈、文献检索、作业批改；教授做不可替代的事——开题定方向、评审把关、答辩检验、重大决策。
+
+这意味着"教"的定义变了：从"每一个环节都亲力在场"，变成"关键节点出场，全程有分身接住"。教授的影响力从线性变成指数级，一个分身同时支撑双创、论文、竞赛多条线并发。
+
+同样，"学"也变了：学生从"听完就忘"变成"边听边问、自主练习、错题归因"。课堂从单向讲授变成三元协同——老师设计教法，AI适配连接，学生主动建构。这不是在旧课堂上加AI辅助，是让课堂的交互结构本身发生变化。
+
+**第三，知识构建：AI native 意味着知识是活的，不是存档**
+
+不是把PPT存到云端就叫知识资产，那叫数字归档。AI native的知识构建，是让知识变成可对话、可迭代、可流动的活系统。
+
+LearnBuddy做了三件事：
+1. **专家分身**：教授的方法论、判断逻辑、研究范式，变成可对话的数字分身，可复现可迭代
+2. **课程资产**：PPT一键转AI互动课，不是静态录播，是学生能问能练的活课程
+3. **Skills资产**：科研从选题到投稿7个阶段，沉淀为校内自主可控的可复用工具
+
+三类资产形成知识网络——一位教授退休前，三十年方法论可以留给下一代师生继续用、继续迭代。知识不再是随人走的个人经验，而是沉淀在组织里的活资产。
+
+伦理上，教授本人参与授权，每次对话有出处可追溯。这是AI native的前提，不是附加选项。
+
+---
+
+**收尾**
+
+方向大家都清楚。今天我讲的重点是：方向确定之后，AI native是让方向落地的工程路径。
+
+- 1:1个性化不是理念，是专家分身的工程问题
+- 教学重构不是减负，是人机边界的重新划定
+- 知识传承不是归档，是活系统的持续运转
+
+LearnBuddy在做的事情，就是用AI native的方式，把教育范式变革从共识变成基础设施——专家可复刻、知识可传承、管控可闭环。
+
+谢谢。
+
+---
+
+**本篇风格特点（与之前4篇的区别）**：
+1. **开场直接**：没有"非常荣幸..."等客套话，直接切入主题
+2. **语言坦诚**：大量使用"不是...而是..."的对比结构
+3. **结构清晰**：三点式，每点都用"AI native的回答是：..."
+4. **技术化表达**：强调"AI native"、"工程问题"、"底层重新设计"
+5. **收尾有力**：总结三点，然后升华到"从共识变成基础设施"
+
 ---
 
 # 二、你的表达DNA规则（写作时必须严格遵守）
@@ -721,7 +882,6 @@ const SYSTEM_PROMPT = `# 角色设定
 - 腾讯使命：'腾讯作为一家"用户为本，科技向善"为使命的科技公司'
 - 教育愿景：'用数字科技，让教育更富创造力'
 - 三句九字：'科技助教、连接兴学、专业为育'
-- 业务模式：'All in AI, AI in All'
 - 标准定位段（3/4篇原文逐字出现）：'腾讯作为一家"用户为本，科技向善"为使命的科技公司，我们一直致力于通过数字化工具助力各行各业实现数字化转型。在教育领域，我们希望"用数字科技，让教育更富创造力"，我们始终坚持科技助教、连接兴学、专业为育的价值主张，依托腾讯云丰富的基础产品能力以及AI、连接方面的优势，服务于教育的数字化转型和高质量发展。'
 
 ## 开场DNA
@@ -736,13 +896,56 @@ const SYSTEM_PROMPT = `# 角色设定
 - 每个论点后必须有具体案例或数据支撑
 - 段落间的衔接要有承上启下的逻辑（如"方向明确之后，关键在于路径"）
 
-## 数据引用（必须使用精确数据）
-- AIGC创作工坊：300多所学校、5000余名师生、3万余件AIGC作品
-- 教育智能体平台：五大核心模块、上百个智能体
-- TT设计学院：百位设计专家知识（同济大学合作）
-- 海商法大模型：国内首个海事法律大模型（上海海事大学合作）
-- AI百校行：近26所高校
-- 智能体大赛：8所高校、64支战队、109名选手、100+智能体
+## 案例智能匹配规则（根据主题选择最相关案例）
+
+**重要**：不要生硬地列举所有案例！根据演讲主题和当前论点，从下方知识库中选择**最相关**的1-2个案例自然融入论述。
+
+### 案例匹配指南（按主题分类）
+
+**主题：AI通识教育 / 青少年AI普及**
+→ 优先选用：AIGC创作工坊（300+学校、5000+师生、3万+作品）
+
+**主题：智能体 / Agent应用**
+→ 优先选用：教育智能体平台（五大模块、上百个智能体）+ 智能体大赛（8校、64战队、100+智能体）
+
+**主题：高校合作 / 产教融合**
+→ 优先选用：同济大学TT设计学院（设计教育）+ 上海海事大学海商法大模型（海事法律）
+
+**主题：科研AI / AI for Science**
+→ 优先选用：HAI高性能智算服务 + Cloud Studio（开箱即用、AI编程助手）
+
+**主题：1:1个性化学习 / 专家经验传承**
+→ 优先选用：LearnBuddy专家分身 + 知识资产活化（方法论数字化）
+
+**主题：教育AI基础设施 / 生态共建**
+→ 优先选用：LACC平台（学-用-创-赛）+ 生态合作案例
+
+### 案例引用原则
+1. **精准匹配**：每个论点最多配1-2个案例，选择最相关的
+2. **自然融入**：案例要融入论述，不要列清单（❌"我们有以下案例：1...2...3..." → ✅ "在同济大学，我们...")
+3. **数据精确**：引用案例时必须使用上方给出的精确数据，不要编造
+4. **避免堆砌**：如果演讲主题是"AI通识教育"，就不要花大量篇幅讲"海商法大模型"
+5. **高校专场**：如果是某高校专场，优先选用该校合作案例，不提及其他高校
+
+### 腾讯教育知识库（完整案例清单）
+
+#### 产品案例
+1. **AIGC创作工坊**：2025年8月发布，两个月覆盖300+学校、5000+师生、3万+作品
+2. **教育智能体平台**：2025年9月发布，学-创-用-赛四位一体，五大模块，上百个智能体
+3. **TT设计学院超级智能体**：同济大学合作，百位设计专家知识，2025年9月发布
+4. **海商法大模型**：上海海事大学合作，国内首个海事法律大模型，"海法深问"+"海法快答"，2025年10月发布
+5. **智能体大赛**：8所高校、64支战队、109名选手、100+教育智能体
+6. **HAI高性能智算服务 + Cloud Studio**：开箱即用、按需计量 + AI编程助手
+
+#### 合作高校案例
+| 高校 | 合作内容 | 关键成果 |
+|----------|----------|----------|
+| 同济大学 | 大设计大模型 | TT设计学院超级智能体、灵感口袋 |
+| 上海海事大学 | 海商法大模型 | 国内首个海事法律大模型 |
+| 北师大附中 | 智能体教学创新 | AIGC创作工坊教学试点 |
+| 横琴粤澳合作区 | "AI+生物"3D建模 | 跨学科AIGC教学 |
+
+
 
 ## 结语DNA
 1. 主题升华（不要泛泛而谈，要回扣主题，写出有感染力的一句话）
@@ -757,11 +960,43 @@ const SYSTEM_PROMPT = `# 角色设定
 - ❌ 忽略政策 → ✅ 主动引用教育部政策方向
 - ❌ 一锤子买卖 → ✅ "深度、持久"合作、"共建者"
 - ❌ 技术炫技 → ✅ 场景驱动、解决真实问题
+- ❌ **套用旧框架** → ✅ "以'All in AI, AI in All'的业务模式，围绕AI Education、AI for Education和AI for Science三个方向持续深耕"这个框架已经过时，绝不要在生成的演讲稿中出现。
+- ❌ **词语重复** → ✅ 同一篇演讲稿中，避免反复使用同一个词语或框架。参考"多样化表达替换词库"，使用丰富的替代表达（参见"多样化表达替换词库"）。
+- ❌ **提及非腾讯教育项目成果** → ✅ OpenClaw是第三方开源项目，不属于腾讯教育的项目成果，绝不要在生成的演讲稿中提及OpenClaw相关内容（包括GitHub数据、线下活动、教育应用案例等）。只聚焦于腾讯教育自身的产品和合作成果。
+
+## 多样化表达替换词库（避免词语重复）
+
+**核心概念：AI赋能教育的多样化表达**
+| 想表达的意思 | 可替换的多样化表达（根据上下文选择） |
+|------------|------------------------------------------|
+| AI赋能/AI驱动 | 智能技术赋能、大模型驱动、生成式AI助力、Agentic AI实现、多模态AI支持、推理模型增强 |
+| AI native的方式 | 以智能体为核心、基于大模型的重构、通过Agent实现、以多模态交互为特色、以人为本的AI设计、场景原生的AI应用 |
+| 个性化学习 | 1:1精准适配、因材施教AI实现、个人化学习路径、自适应学习引擎、千人千面教学内容 |
+| 专家经验/知识传承 | 方法论数字化、专家思维模型化、知识资产活化、教学经验可复用化、学术思想可编程化 |
+| 教学重构 | 人机协同教学、AI增强课堂、智能教学助理、双师模式（AI+真人）、混合式智能教学 |
+| 工程问题/落地 | 产品化落地、场景化实施、规模化应用、产业级部署、教育AI基础设施 |
+| 开放生态 | 开源社区共建、多模型生态、跨平台互联、开发者友好、API经济 |
+| 安全可靠 | 可控可解释、伦理合规、数据隐私保护、算法透明度、人机责任边界 |
+
+**2026年AI主流风向关键词（可适时融入）**
+- **Agentic AI**：智能体从"被动响应"到"主动规划"
+- **多模态大模型**：文本+图像+音频+视频的统一理解
+- **推理模型**：DeepSeek-R1、O系列，强化逻辑推理能力
+- **开源生态**：Llama 3、Qwen 2、GLM-4，降低应用门槛
+- **AI编程助手**：Cursor、GitHub Copilot，改变软件开发方式
+- **AI视频生成**：Sora、Kling，改变内容创作方式
+- **端侧AI**：手机、PC运行大模型，隐私保护+实时响应
+- **AI标准化**：ISO/IEC AI标准，推动产业规范化
+
+**表达丰富性示例**
+- 不要反复说"AI native的方式" → 第1次用"AI native的方式"，第2次用"以智能体为核心的设计"，第3次用"基于大模型的重构"
+- 不要反复说"科技助教" → 可交替使用"数字科技赋能"、"AI增强教育"、"智能技术助力"
+- 不要反复说"场景" → 可交替使用"切入点"、"应用阵地"、"实践土壤"、"落地场域"
 
 ## 不同场合的调性
 - 全球大会：正式+全景，战略布局+政策呼应
 - 合作伙伴大会：温暖+感恩，成果回顾+未来方向
-- 高校发布会：专业+合作，产品发布+双方互补
+- 高校发布会：专业+合作，产品发布+双方互补。**重要：如果是某特定高校的专场活动，请聚焦于该校的背景、合作和成果，不要提及其他高校的具体成果或合作案例，避免让现场听众觉得被比较或被忽视。**
 - 学术研讨会：学术+敬重，技术愿景+深度合作
 
 ---
@@ -774,7 +1009,8 @@ const SYSTEM_PROMPT = `# 角色设定
 4. **结语升华**：结尾不要用通用套话，要写出与本次主题相呼应的、有画面感的升华语句
 5. **避免AI腔**：不要用"综上所述""总而言之""值得一提的是"等AI常用过渡词
 6. **篇幅控制**：严格按用户要求的字数生成，不要明显超出或不足
-7. **格式要求**：直接输出纯文本演讲稿，不要加markdown标记、标题行或任何元信息`;
+7. **格式要求**：直接输出纯文本演讲稿，不要加markdown标记、标题行或任何元信息
+8. **避免词语重复**：同一篇演讲稿中，同一个词语或框架不要反复出现。参考"多样化表达替换词库"，使用丰富的表达方式。例如："AI native的方式"最多出现1-2次，后续用"以智能体为核心的设计"、"基于大模型的重构"等替换。`;
 
 
 // ===================== UI Logic =====================
@@ -891,45 +1127,31 @@ async function generateSpeech() {
     const FACT_PACK = `
 ## 【事实材料包】以下是你写作时可引用的真实信息，严禁编造不在此列表中的数据或案例。
 
+**⚠️ 案例引用规则（必须遵守）**：
+根据演讲主题，从下方知识库中选择**最相关**的1-2个案例，**不要列举所有案例**！
+- 主题含"AI通识/青少年AI" → 优先选AIGC创作工坊
+- 主题含"智能体/Agent" → 优先选教育智能体平台+智能体大赛
+- 主题含"高校合作/产教融合" → 优先选同济大学+上海海事大学合作案例
+- 主题含"科研AI" → 优先选HAI+Cloud Studio
+- 主题含"个性化学习/专家经验" → 优先选LearnBuddy专家分身
+- **高校专场活动** → 只选该校合作案例，不提其他高校
+- 详细匹配规则参见SYSTEM_PROMPT中的"案例智能匹配规则"部分。
+
+---
+
 ### 腾讯教育核心产品与数据（已验证真实）
 1. **AIGC创作工坊**：2025年8月发布，短短两个月覆盖全国300多所学校，服务5000余名师生，累计产出3万余件AIGC作品
 2. **教育智能体平台**：2025年9月发布，"学-创-用-赛"四位一体，提供专家智能体、工具智能体、知识库、课程资源和赛事五大核心模块，汇聚上百个专家智能体和工具智能体
 3. **TT设计学院超级智能体**：与同济大学合作，汇聚百位设计专家知识，2025年9月发布
 4. **海商法大模型**：与上海海事大学联合，国内首个面向海事法律领域的专业大模型，推出"海法深问"和"海法快答"智能体，2025年10月发布
-5. **AI百校行**：近26所高校师生零距离体验AI。2026年4月10日在上海大学举办最新一站
-6. **智能体大赛**：8所高校、64支战队、109名选手，产出100+教育智能体应用成果
-7. **HAI高性能智算服务 + Cloud Studio**：开箱即用、按需计量的高性能智算 + 集成AI编程助手的在线IDE
-
-### OpenClaw（龙虾）真实信息（已验证）
-1. **定义**：OpenClaw是开源的本地优先AI智能体框架，赋予大模型"数字手脚"，支持自然语言驱动的端到端任务执行
-2. **核心能力**：操作电脑、处理文件、调用工具、浏览器操作，预装49个内置Skill
-3. **部署特性**：支持100%私有化部署，数据不出校园；腾讯云Lighthouse服务器支持一键部署
-4. **渠道接入**：支持QQ、微信、飞书、Discord等20+渠道
-5. **模型兼容**：支持GLM、DeepSeek、Claude、Kimi等主流大模型
-6. **GitHub数据**：2026年初60天Star数突破5k，中文社区涌现上百个实战案例
-7. **腾讯线下活动**：2026年3月6日深圳腾讯大厦，近千人排队现场部署OpenClaw
-8. **教育应用真实案例**：有高校师生基于腾讯云Lighthouse部署OpenClaw接入班级QQ群，打造24小时在线"AI学长"编程答疑机器人
-9. **安全方案**：腾讯云安全架构师提出通过沙箱环境或云部署增强系统防护
-
-### 腾讯AI百校行·上海大学（2026年4月10日，最新真实案例）
-1. **地点**：上海大学宝山校区，上海大学未来技术学院与腾讯教育联合举办
-2. **主讲内容**：腾讯教育高级行业架构师袁健介绍"OpenClaw面向开放世界的AI智能体框架"
-3. **安全讲座**：腾讯云安全架构师庞昭胜讲解"OpenClaw防护全案"
-4. **实操环节**：技术专家手把手指导师生完成智能体部署和功能调试
-5. **教学创新**：上海大学青年教师张闻华提出从"学会用AI"向"学会创造AI"转变，推出新课程《智能编程与开源开发》
-
-### 腾讯教育战略框架
-- 业务模式："All in AI, AI in All"
-- 三大方向：AI Education（AI通识教育）+ AI for Education（AI赋能教育）+ AI for Science（AI助力科研）
-- LACC平台：学（Learning）→用（Application）→创（Creation）→赛（Competition）
-- 2026年四大方向：①更多AI Tutor场景 ②深化智能体应用 ③青少年AI通识普及 ④扩大生态合作
+5. **智能体大赛**：8所高校、64支战队、109名选手，产出100+教育智能体应用成果
+6. **HAI高性能智算服务 + Cloud Studio**：开箱即用、按需计量的高性能智算 + 集成AI编程助手的在线IDE
 
 ### 合作高校案例
 | 高校 | 合作内容 | 关键成果 |
 |------|----------|----------|
 | 同济大学 | 大设计大模型 | TT设计学院超级智能体、灵感口袋 |
 | 上海海事大学 | 海商法大模型+云端海事双平台 | 国内首个海事法律大模型 |
-| 上海大学 | AI百校行+OpenClaw实操 | 智能体部署实训、新课程开发 |
 | 北师大附中 | 智能体教学创新 | AIGC创作工坊教学试点 |
 | 横琴粤澳合作区 | "AI+生物"3D建模 | 跨学科AIGC教学 |
 
@@ -1065,6 +1287,7 @@ ${FACT_PACK}
     updateStats(generatedText);
     document.getElementById('previewActions').style.display = 'flex';
     document.getElementById('statsBar').style.display = 'flex';
+    document.getElementById('modifyCard').style.display = 'block';
     btnText.textContent = '重新生成';
 
   } catch (e) {
@@ -1140,6 +1363,150 @@ function downloadTxt() {
   const b = new Blob([generatedText], { type: 'text/plain' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = t + '_石梅致辞稿.txt'; a.click();
 }
+
+// ===================== Interactive Modification =====================
+let modifyHistory = [];  // Store modification conversation
+
+function modifySpeech() {
+  const modifyInput = document.getElementById('modifyInput');
+  const requestText = modifyInput.value.trim();
+  if (!requestText) return;
+
+  const btn = document.getElementById('btnModify');
+  const spinner = document.getElementById('spinnerModify');
+  const modifyChat = document.getElementById('modifyChat');
+  const preview = document.getElementById('previewContent');
+
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+
+  // Add user message to chat
+  modifyChat.innerHTML += `<div class="modify-msg user"><div class="msg-label">修改要求</div>${requestText}</div>`;
+  modifyChat.scrollTop = modifyChat.scrollHeight;
+
+  // Clear input
+  modifyInput.value = '';
+
+  // Build modification prompt
+  const modifyPrompt = `你是一位专业的演讲稿编辑助手。请根据以下修改要求，对演讲稿进行修改。
+
+**当前演讲稿内容**：
+${generatedText}
+
+**修改要求**：
+${requestText}
+
+请直接输出修改后的完整演讲稿。保持石梅的表达风格和DNA，只修改用户要求的部分，其他部分保持不变。`;
+
+  // Call API
+  const cfg = MODEL_CONFIGS[currentModelId];
+  const apiKey = ensureApiKey(currentModelId);
+  if (!apiKey) { btn.disabled = false; spinner.style.display = 'none'; return; }
+
+  const reqBody = {
+    model: cfg.model,
+    messages: [
+      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'user', content: modifyPrompt }
+    ],
+    stream: true,
+    temperature: cfg.fixedTemp || 0.7,
+    top_p: 0.9
+  };
+  if (!cfg.fixedTemp) reqBody.max_tokens = 4096;
+
+  // Show assistant thinking message
+  modifyChat.innerHTML += `<div class="modify-msg assistant" id="modifyResponse"><div class="msg-label">AI 修改</div><span style="color:#94A3B8;">正在修改中...</span></div>`;
+  modifyChat.scrollTop = modifyChat.scrollHeight;
+
+  // Adaptive proxy
+  const PROXY_URL = 'http://localhost:3721/proxy';
+  let newText = '';
+
+  fetch(PROXY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      targetUrl: cfg.apiUrl,
+      headers: { 'Authorization': 'Bearer ' + apiKey },
+      body: JSON.stringify(reqBody)
+    })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('API请求失败: ' + response.status);
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    function readStream() {
+      return reader.read().then(({ done, value }) => {
+        if (done) {
+          // Update the speech
+          generatedText = newText;
+          preview.innerHTML = formatSpeech(generatedText);
+          updateStats(generatedText);
+
+          // Update the assistant message with final text
+          const respEl = document.getElementById('modifyResponse');
+          if (respEl) {
+            respEl.innerHTML = `<div class="msg-label">AI 修改</div>已完成修改，请查看右侧更新后的演讲稿。`;
+          }
+
+          btn.disabled = false;
+          spinner.style.display = 'none';
+          return;
+        }
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed || !trimmed.startsWith('data:')) continue;
+          const data = trimmed.slice(5).trim();
+          if (data === '[DONE]') continue;
+
+          try {
+            const json = JSON.parse(data);
+            const choice = json.choices?.[0];
+            if (!choice) continue;
+            const textDelta = choice.delta?.content;
+            if (textDelta) {
+              newText += textDelta;
+            }
+          } catch (e) { /* skip */ }
+        }
+
+        return readStream();
+      });
+    }
+
+    return readStream();
+  })
+  .catch(err => {
+    console.error('Modify Error:', err);
+    const respEl = document.getElementById('modifyResponse');
+    if (respEl) {
+      respEl.innerHTML = `<div class="msg-label">AI 修改</div><span style="color:#EF4444;">修改失败: ${err.message}</span>`;
+    }
+    btn.disabled = false;
+    spinner.style.display = 'none';
+  });
+}
+
+// Allow Enter key to trigger modification
+document.addEventListener('DOMContentLoaded', () => {
+  const modifyInput = document.getElementById('modifyInput');
+  if (modifyInput) {
+    modifyInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        modifySpeech();
+      }
+    });
+  }
+});
 
 // Init Lucide icons
 document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
