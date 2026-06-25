@@ -88,12 +88,18 @@
 
   /* ========== Main layout ========== */
   .main {
-    max-width: 1280px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 28px 40px 40px;
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 400px 1fr 360px;
     gap: 28px;
+  }
+  .main.history-collapsed {
+    grid-template-columns: 400px 1fr 0px;
+  }
+  .main.history-collapsed .history-panel-inline {
+    display: none;
   }
 
   /* ========== Left panel: 深色区块 ========== */
@@ -250,6 +256,33 @@
     background: rgba(129,140,248,0.12);
     color: #C7D2FE;
     font-weight: 600;
+  }
+
+  /* ========== Toggle (引用案例) ========== */
+  .toggle-row {
+    display: flex;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 3px;
+  }
+  .toggle-option {
+    flex: 1;
+    text-align: center;
+    padding: 7px 0;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #94A3B8;
+    font-weight: 500;
+  }
+  .toggle-option:hover { background: rgba(255,255,255,0.06); color: #C7D2FE; }
+  .toggle-option.active {
+    background: rgba(129,140,248,0.18);
+    color: #E0E7FF;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(129,140,248,0.12);
   }
 
   /* ========== Slider ========== */
@@ -494,9 +527,58 @@
   /* ========== Responsive ========== */
   @media (max-width: 960px) {
     .main { grid-template-columns: 1fr; padding: 16px; }
+    .main.history-collapsed { grid-template-columns: 1fr; }
     .header { padding: 18px 20px; }
     .dna-group-cards { grid-template-columns: 1fr; }
+    .history-panel-inline { display: none; }
   }
+
+  /* ========== 历史记录面板（内嵌） ========== */
+  .history-panel-inline {
+    background: #1E293B;
+    border: 1px solid #334155;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 500px;
+  }
+  .history-panel-inline.collapsed {
+    display: none;
+  }
+  .history-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; border-bottom: 1px solid #334155;
+    background: #0F172A;
+    flex-shrink: 0;
+  }
+  .history-header h3 { margin: 0; font-size: 14px; color: #E2E8F0; display: flex; align-items: center; gap: 6px; }
+  .history-toggle-btn {
+    background: none; border: 1px solid #334155; color: #94A3B8; cursor: pointer;
+    padding: 4px 8px; border-radius: 4px; font-size: 11px; display: flex; align-items: center; gap: 4px;
+  }
+  .history-toggle-btn:hover { color: #E2E8F0; background: #334155; }
+  .history-list { flex: 1; overflow-y: auto; padding: 12px; }
+  .history-item {
+    background: #0F172A; border: 1px solid #334155; border-radius: 8px;
+    padding: 12px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s;
+  }
+  .history-item:hover { border-color: #818CF8; background: #1a2340; }
+  .history-item.active { border-color: #818CF8; background: #1a2340; }
+  .history-item-title { font-size: 13px; font-weight: 600; color: #E2E8F0; margin-bottom: 4px; }
+  .history-item-meta { font-size: 11px; color: #64748B; margin-bottom: 6px; }
+  .history-item-preview { font-size: 12px; color: #94A3B8; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .history-item-actions { display: flex; gap: 8px; margin-top: 8px; }
+  .history-item-actions button {
+    flex: 1; padding: 4px 8px; border: 1px solid #334155; border-radius: 4px;
+    background: transparent; color: #94A3B8; font-size: 11px; cursor: pointer; transition: all 0.2s;
+  }
+  .history-item-actions button:hover { border-color: #818CF8; color: #818CF8; }
+  .history-item-actions .btn-restore:hover { border-color: #22C55E; color: #22C55E; }
+  .history-item-actions .btn-delete:hover { border-color: #EF4444; color: #EF4444; }
+  .history-empty { text-align: center; color: #64748B; padding: 40px 20px; font-size: 13px; }
+
 </style>
 </head>
 <body>
@@ -563,6 +645,15 @@
           <div class="struct-pill" data-val="product"><i data-lucide="rocket"></i> 产品发布</div>
           <div class="struct-pill" data-val="collab"><i data-lucide="users"></i> 合作描述</div>
           <div class="struct-pill" data-val="vision"><i data-lucide="telescope"></i> 战略展望</div>
+        </div>
+      </div>
+
+      <!-- 引用案例 -->
+      <div class="form-group">
+        <div class="form-label">引用案例 <span class="hint">关闭则不引用任何案例和数据</span></div>
+        <div class="toggle-row" id="caseToggleRow">
+          <div class="toggle-option active" data-val="on" onclick="toggleCase('on')">引用案例</div>
+          <div class="toggle-option" data-val="off" onclick="toggleCase('off')">不引用案例</div>
         </div>
       </div>
 
@@ -640,6 +731,18 @@
       </div>
     </div>
   </div>
+
+  <!-- 历史记录面板（内嵌） -->
+  <div class="history-panel-inline" id="historyPanelInline">
+    <div class="history-header">
+      <h3><i data-lucide="clock"></i> 历史记录</h3>
+      <button class="history-toggle-btn" onclick="toggleHistoryPanel()">
+        <i data-lucide="chevron-right" style="width:14px;height:14px;"></i> 收起
+      </button>
+    </div>
+    <div class="history-list" id="historyList"></div>
+  </div>
+
 </div>
 
 <script>
@@ -1016,12 +1119,20 @@ LearnBuddy在做的事情，就是用AI native的方式，把教育范式变革�
 // ===================== UI Logic =====================
 let selectedOccasion = 'conference';
 let selectedStruct = 'policy';
+let caseToggle = 'on';  // 'on' = 引用案例, 'off' = 不引用案例
 let generatedText = '';
 let abortController = null;
 
 function switchModel(modelId) {
   currentModelId = modelId;
   localStorage.setItem('selected_model', modelId);
+}
+
+function toggleCase(val) {
+  caseToggle = val;
+  document.querySelectorAll('#caseToggleRow .toggle-option').forEach(o => {
+    o.classList.toggle('active', o.dataset.val === val);
+  });
 }
 
 function manageApiKey() {
@@ -1158,6 +1269,16 @@ async function generateSpeech() {
 ⚠️ 重要：演讲稿中只能引用上述材料包中的数据和案例。如果用户的主题涉及上述材料未覆盖的内容，用泛化表述（如"我们在多个领域取得了实践成果"），绝对不要编造具体数字或不存在的产品名称。
 `;
 
+    // 不引用案例时的规则包
+    const NO_CASE_RULE = `
+## 【写作指导】本演讲稿不引用具体产品案例、合作高校名称或精确数据。
+请用泛化、概括性的表述来阐述腾讯教育的理念和实践，例如：
+- 用"我们在多所高校开展了合作实践"代替具体高校名称
+- 用"取得了显著成效"代替具体数字
+- 用"推出了系列教育AI产品"代替具体产品名称
+
+⚠️ 重要：不得引用事实材料包中的任何具体案例、数据或产品名称。所有表述必须泛化。`;
+
     const fullUserPrompt = `${taskDesc}
 
 **活动全称**：${eventName || '（未指定，请根据主题自行拟定合适的场合描述）'}
@@ -1167,13 +1288,12 @@ async function generateSpeech() {
 **现场听众**：${audience || '根据场合类型自行判断'}
 ${extras ? '**补充要点**：' + extras : ''}
 
-${FACT_PACK}
+${caseToggle === 'on' ? FACT_PACK : NO_CASE_RULE}
 
 要求：
 1. 严格遵循石梅的表达DNA和致辞稿标准结构
 2. 必须包含标准自我介绍段（使命+愿景+三句九字）
-3. 必须引用事实材料包中至少3个真实案例和精确数据
-4. 严禁编造材料包中不存在的产品、数据或案例
+${caseToggle === 'on' ? '3. 必须引用事实材料包中至少3个真实案例和精确数据\n4. 严禁编造材料包中不存在的产品、数据或案例' : '3. 不引用任何具体案例、数据或产品名称，全部用泛化表述\n4. 重点阐述理念、方向和愿景，而非具体成果'}
 5. 开场用"我是腾讯教育石梅"
 6. 结语必须有"预祝……圆满成功！谢谢大家！"
 7. 约${targetWords}字
@@ -1288,6 +1408,14 @@ ${FACT_PACK}
     document.getElementById('previewActions').style.display = 'flex';
     document.getElementById('statsBar').style.display = 'flex';
     document.getElementById('modifyCard').style.display = 'block';
+
+    // 保存到历史记录
+    addToHistory(generatedText, {
+      topic: document.getElementById('topic').value.trim(),
+      eventName: document.getElementById('eventName').value.trim(),
+      model: MODEL_CONFIGS[currentModelId].name
+    });
+
     btnText.textContent = '重新生成';
 
   } catch (e) {
@@ -1367,6 +1495,119 @@ function downloadTxt() {
 // ===================== Interactive Modification =====================
 let modifyHistory = [];  // Store modification conversation
 
+// ========== 历史记录功能 ==========
+let historyList = [];
+let currentHistoryId = null;
+
+function loadHistoryFromStorage() {
+  try {
+    const data = localStorage.getItem('shimei_speech_history');
+    historyList = data ? JSON.parse(data) : [];
+  } catch (e) {
+    historyList = [];
+  }
+}
+
+function saveHistoryToStorage() {
+  try {
+    localStorage.setItem('shimei_speech_history', JSON.stringify(historyList));
+  } catch (e) {
+    console.warn('保存历史记录失败:', e);
+  }
+}
+
+function addToHistory(text, meta) {
+  const item = {
+    id: Date.now().toString(),
+    text: text,
+    topic: meta.topic || '',
+    eventName: meta.eventName || '',
+    model: meta.model || '',
+    timestamp: Date.now(),
+    dateStr: new Date().toLocaleString('zh-CN', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+  };
+  historyList.unshift(item);  // 最新在前
+  // 最多保存 50 条
+  if (historyList.length > 50) historyList = historyList.slice(0, 50);
+  saveHistoryToStorage();
+  renderHistoryList();
+}
+
+function deleteHistoryItem(id) {
+  historyList = historyList.filter(item => item.id !== id);
+  saveHistoryToStorage();
+  renderHistoryList();
+}
+
+function restoreHistoryItem(id) {
+  const item = historyList.find(h => h.id === id);
+  if (!item) return;
+  generatedText = item.text;
+  document.getElementById('previewContent').innerHTML = formatSpeech(generatedText);
+  updateStats(generatedText);
+  currentHistoryId = id;
+  renderHistoryList();
+  // 切换到预览标签
+  document.querySelector('[data-tab="preview"]').click();
+}
+
+function renderHistoryList() {
+  const listEl = document.getElementById('historyList');
+  if (!listEl) return;
+
+  if (historyList.length === 0) {
+    listEl.innerHTML = '<div class="history-empty">暂无历史记录<br>生成演讲稿后将自动保存</div>';
+    return;
+  }
+
+  let html = '';
+  historyList.forEach(item => {
+    const preview = item.text.replace(/<[^>]+>/g, '').slice(0, 60).replace(/\n/g, ' ');
+    const activeClass = currentHistoryId === item.id ? ' active' : '';
+    html += `<div class="history-item${activeClass}" onclick="restoreHistoryItem('${item.id}')">
+      <div class="history-item-title">${item.topic || item.eventName || '未命名'}</div>
+      <div class="history-item-meta">${item.dateStr} | ${item.model || ''} | ${item.text.length}字</div>
+      <div class="history-item-preview">${preview}...</div>
+      <div class="history-item-actions" onclick="event.stopPropagation();">
+        <button class="btn-restore" onclick="restoreHistoryItem('${item.id}')">恢复</button>
+        <button class="btn-delete" onclick="deleteHistoryItem('${item.id}')">删除</button>
+      </div>
+    </div>`;
+  });
+  listEl.innerHTML = html;
+}
+
+function toggleHistoryPanel() {
+  const mainEl = document.querySelector('.main');
+  const panel = document.getElementById('historyPanelInline');
+  const btn = document.querySelector('.history-toggle-btn');
+  if (!panel) return;
+  const isCollapsed = mainEl.classList.contains('history-collapsed');
+  if (isCollapsed) {
+    // 展开
+    mainEl.classList.remove('history-collapsed');
+    panel.style.display = 'flex';
+    if (btn) {
+      btn.innerHTML = '<i data-lucide="chevron-right" style="width:14px;height:14px;"></i> 收起';
+      lucide.createIcons();
+    }
+    renderHistoryList();
+  } else {
+    // 收起
+    mainEl.classList.add('history-collapsed');
+    if (btn) {
+      btn.innerHTML = '<i data-lucide="chevron-left" style="width:14px;height:14px;"></i> 展开历史';
+      lucide.createIcons();
+    }
+  }
+}
+
+// 初始化历史记录
+loadHistoryFromStorage();
+renderHistoryList();
+
+
+
 function modifySpeech() {
   const modifyInput = document.getElementById('modifyInput');
   const requestText = modifyInput.value.trim();
@@ -1419,18 +1660,28 @@ ${requestText}
   modifyChat.innerHTML += `<div class="modify-msg assistant" id="modifyResponse"><div class="msg-label">AI 修改</div><span style="color:#94A3B8;">正在修改中...</span></div>`;
   modifyChat.scrollTop = modifyChat.scrollHeight;
 
-  // Adaptive proxy
+  // 自适应代理：优先走本地代理（解决CORS），失败则直连
   const PROXY_URL = 'http://localhost:3721/proxy';
   let newText = '';
 
-  fetch(PROXY_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+  function doFetch(useProxy) {
+    const url = useProxy ? PROXY_URL : cfg.apiUrl;
+    const headers = useProxy ? { 'Content-Type': 'application/json' } : {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + apiKey
+    };
+    const body = useProxy ? JSON.stringify({
       targetUrl: cfg.apiUrl,
       headers: { 'Authorization': 'Bearer ' + apiKey },
       body: JSON.stringify(reqBody)
-    })
+    }) : JSON.stringify(reqBody);
+    return fetch(url, { method: 'POST', headers, body });
+  }
+
+  doFetch(true)
+  .catch(() => {
+    console.warn('代理不可用，尝试直连');
+    return doFetch(false);
   })
   .then(response => {
     if (!response.ok) throw new Error('API请求失败: ' + response.status);
@@ -1445,6 +1696,13 @@ ${requestText}
           generatedText = newText;
           preview.innerHTML = formatSpeech(generatedText);
           updateStats(generatedText);
+
+          // 保存到历史记录
+          addToHistory(generatedText, {
+            topic: document.getElementById('topic').value.trim(),
+            eventName: document.getElementById('eventName').value.trim(),
+            model: MODEL_CONFIGS[currentModelId].name
+          });
 
           // Update the assistant message with final text
           const respEl = document.getElementById('modifyResponse');
@@ -1511,5 +1769,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Init Lucide icons
 document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
 </script>
+
+
 </body>
 </html>
